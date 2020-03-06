@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Realtime coronavirus cases in Germany</title>
+
+
+<style type="text/css">
+body {margin: 0;padding: 0;text-align: center;}
+#convas {
+ width: 80%; /* 这将创建一个占据 80% 浏览器宽度的容器 */
+ background: #FFFFFF;
+ margin: 0 auto; /* 自动边距（与宽度一起）会将页面居中 */
+ border: 0px solid #000000;
+ text-align: left; /* 这将覆盖 body 元素上的“text-align: center”。 */
+}
+#mainContent {padding: 0 20px; /* 请记住，填充是 div 方块内部的空间，边距则是 div 方块外部的空间 */}
+</style>
+
+
 </head>
 <body>
 <script src="d3.min.js"></script>
@@ -49,6 +65,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
     var bubble_map = new Datamap({
         element: document.getElementById('convas'),
         scope: 'deu',
+        responsive: true,
         geographyConfig: {
             popupOnHover: true,
             highlightOnHover: true,
@@ -66,7 +83,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
     },
     setProjection: function (element) {
         var projection = d3.geo.mercator()
-            .center([13, 52]) // always in [East Latitude, North Longitude]
+            .center([14.5, 52]) // always in [East Latitude, North Longitude]
             .scale(2500);
         var path = d3.geo.path().projection(projection);
         return { path: path, projection: projection };
@@ -87,6 +104,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
     window.addEventListener('resize', function() {
         window.bubble_map.resize();
     });
+
     </script>
 </body>
 
