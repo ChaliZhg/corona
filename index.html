@@ -7,12 +7,13 @@
 
 <style type="text/css">
 body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;}
-#convas {
- width: 100%;
+#canvas {
+ width: 80%;
  background: #FFFFFF;
  margin: 0 auto;
  border: 0px solid #000000;
  text-align: left;
+ left: 0;
 }
 </style>
 
@@ -25,7 +26,7 @@ body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;}
     <h1 id='message'></h1>
     <div id='source'>According to realtime data from zeit.de</div>
     <div id='time'></div>
-    <div id="convas" style="height: 600px; width: 600px;"></div>
+    <div id="canvas" style="height: 600px; width: 100%;"></div>
     <script>
     bubbles = [];
     total = 0;
@@ -62,7 +63,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         dt.toString();
 });
     var bubble_map = new Datamap({
-        element: document.getElementById('convas'),
+        element: document.getElementById('canvas'),
         scope: 'deu',
         responsive: true,
         geographyConfig: {
