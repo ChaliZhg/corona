@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
-    <title></title>
+    <title>Realtime coronavirus cases in Germany</title>
 </head>
 <body>
 <script src="d3.min.js"></script>
 <script src="topojson.min.js"></script>
     <script src="datamaps.deu.js"></script>
-    <h1 id='t1'></h1>
-    <div id="convas" style="height: 900px; width: 600px;"></div>
+    <h1 id='message'></h1>
+    <div id='source'>According to realtime data from zeit.de</div>
+    <div id='time'></div>
+    <div id="convas" style="height: 600px; width: 600px;"></div>
     <script>
-        document.title = "截至3月6日中午12时，德国确诊584例，其中萨可森州1例。";
-        document.getElementById('t1').innerHTML = document.title;
+    bubbles = [];
+    total = 0;
+    atSachsen = 0;
+    scale = 3;
+
+d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data){
+    for (var i = data.length - 1; i >= 0; i--) {
+        if(data[i].Bundesland.length>0)
+        {
+            if(data[i].Bundesland=="Summe")
+            {
+                total = data[i].Fälle
+            }
+            else
+            {
+                anode = 
+                {
+                    centered: data[i].Bundesland,
+                    fillKey: "high",
+                    radius: Math.sqrt(data[i].Fälle)*scale,
+                    value:data[i].Fälle
+                };
+                bubbles.push(anode);
+            }
+            if(data[i].Bundesland=="Sachsen")
+            {atSachsen = data[i].Fälle}
+        }
+    };
+        document.getElementById('message').innerHTML = 
+        total + " confirmed cases in Germany with "+atSachsen+" at Sachsen.";
+        var dt = new Date();
+        document.getElementById('time').innerHTML = 
+        dt.toString();
+});
     var bubble_map = new Datamap({
         element: document.getElementById('convas'),
         scope: 'deu',
@@ -39,106 +73,6 @@
     }
     });
 
-    let scale = 3;
-
-    let bubbles = [
-        {
-        centered: "Nordrhein-Westfalen",
-        fillKey: "high",
-        radius: Math.sqrt(324)*scale,
-        value:324
-        },
-        {
-            centered: "Baden-Württemberg",
-            fillKey: "high",
-            radius: Math.sqrt(89)*scale,
-            value: 89
-        },
-        {
-            centered: "Bayern",
-            fillKey: "high",
-            radius: Math.sqrt(87)*scale,
-            value:87
-        },
-        {
-            centered: "Brandenburg",
-            fillKey: "high",
-            radius: Math.sqrt(1)*scale,
-            value:1
-        },
-        {
-            centered: "Berlin",
-            fillKey: "high",
-            radius: Math.sqrt(15)*scale,
-            value:15
-        },
-        {
-            centered: "Bremen",
-            fillKey: "high",
-            radius: Math.sqrt(4)*scale,
-            value:4
-        },
-        {
-            centered: "Hamburg",
-            fillKey: "high",
-            radius: Math.sqrt(8)*scale,
-            value:8
-        },
-        {
-            centered: "Hessen",
-            fillKey: "high",
-            radius: Math.sqrt(14)*scale,
-            value:14
-        },
-        {
-            centered: "Mecklenburg-Vorpommern",
-            fillKey: "high",
-            radius: Math.sqrt(5)*scale,
-            value:5
-        },
-        {
-            centered: "Niedersachsen",
-            fillKey: "high",
-            radius: Math.sqrt(18)*scale,
-            value:18
-        },
-        {
-            centered: "Rheinland-Pfalz",
-            fillKey: "high",
-            radius: Math.sqrt(9)*scale,
-            value:9
-        },
-        {
-            centered: "Saarland",
-            fillKey: "high",
-            radius: Math.sqrt(1)*scale,
-            value:1
-        },
-        {
-            centered: "Sachsen-Anhalt",
-            fillKey: "high",
-            radius: 0*scale,
-            value:0
-        },
-        {
-            centered: "Sachsen",
-            fillKey: "high",
-            radius: Math.sqrt(1)*scale,
-            value:1
-        },
-        {
-            centered: "Schleswig-Holstein",
-            fillKey: "high",
-            radius: Math.sqrt(7)*scale,
-            value:7
-        },
-        {
-            centered: "Thüringen",
-            fillKey: "high",
-            radius: Math.sqrt(1)*scale,
-            value:1
-        },
-    ];
 
     bubble_map.labels();
     //ISO ID code for city or <state></state>
