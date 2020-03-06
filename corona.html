@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title></title>
+</head>
+<body>
+<script src="d3.min.js"></script>
+<script src="topojson.min.js"></script>
+    <script src="datamaps.deu.js"></script>
+    <h1 id='t1'></h1>
+    <div id="convas" style="height: 900px; width: 600px;"></div>
+    <script>
+        document.title = "截至3月6日中午12时，德国确诊584例，其中萨可森州1例。";
+        document.getElementById('t1').innerHTML = document.title;
+    var bubble_map = new Datamap({
+        element: document.getElementById('convas'),
+        scope: 'deu',
+        geographyConfig: {
+            popupOnHover: true,
+            highlightOnHover: true,
+            borderColor: '#444',
+            borderWidth: 0.5,
+        },
+    fills: {
+    defaultFill: "#dddddd",
+    high: 'red',
+    middle: '#80ffe5',
+    low: '#0f00fa'
+    },
+    data: {
+    'Sachsen': { fillKey: 'middle' },
+    },
+    setProjection: function (element) {
+        var projection = d3.geo.mercator()
+            .center([13, 52]) // always in [East Latitude, North Longitude]
+            .scale(2500);
+        var path = d3.geo.path().projection(projection);
+        return { path: path, projection: projection };
+    }
+    });
+
+    let scale = 0.5;
+
+    let bubbles = [
+        {
+        centered: "Nordrhein-Westfalen",
+        fillKey: "high",
+        radius: 324*scale,
+        value:324
+        },
+        {
+            centered: "Baden-Württemberg",
+            fillKey: "high",
+            radius: 89*scale,
+        },
+        {
+            centered: "Bayern",
+            fillKey: "high",
+            radius: 87*scale,
+            value:87
+        },
+        {
+            centered: "Brandenburg",
+            fillKey: "high",
+            radius: 1*scale,
+            value:1
+        },
+        {
+            centered: "Berlin",
+            fillKey: "high",
+            radius: 15*scale,
+            value:15
+        },
+        {
+            centered: "Bremen",
+            fillKey: "high",
+            radius: 4*scale,
+            value:4
+        },
+        {
+            centered: "Hamburg",
+            fillKey: "high",
+            radius: 8*scale,
+            value:8
+        },
+        {
+            centered: "Hessen",
+            fillKey: "high",
+            radius: 14*scale,
+            value:14
+        },
+        {
+            centered: "Mecklenburg-Vorpommern",
+            fillKey: "high",
+            radius: 5*scale,
+            value:5
+        },
+        {
+            centered: "Niedersachsen",
+            fillKey: "high",
+            radius: 18*scale,
+            value:18
+        },
+        {
+            centered: "Rheinland-Pfalz",
+            fillKey: "high",
+            radius: 9*scale,
+            value:9
+        },
+        {
+            centered: "Saarland",
+            fillKey: "high",
+            radius: 1*scale,
+            value:1
+        },
+        {
+            centered: "Sachsen-Anhalt",
+            fillKey: "high",
+            radius: 0*scale,
+            value:0
+        },
+        {
+            centered: "Sachsen",
+            fillKey: "high",
+            radius: 1*scale,
+            value:1
+        },
+        {
+            centered: "Schleswig-Holstein",
+            fillKey: "high",
+            radius: 7*scale,
+            value:7
+        },
+        {
+            centered: "Thüringen",
+            fillKey: "high",
+            radius: 1*scale,
+            value:1
+        },
+    ];
+
+    bubble_map.labels();
+    //ISO ID code for city or <state></state>
+    setTimeout(() => { // only start drawing bubbles on the map when map has rendered completely.
+        bubble_map.bubbles(bubbles, {
+            popupTemplate: function (geo, data) {
+                return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+            }
+        });
+    }, 1000);
+
+    window.addEventListener('resize', function() {
+        window.bubble_map.resize();
+    });
+    </script>
+</body>
+
+</html>
