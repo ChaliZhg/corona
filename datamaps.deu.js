@@ -427,7 +427,13 @@
           .style("font-size", (options.fontSize || 10) + 'px')
           .style("font-family", options.fontFamily || "Verdana")
           .style("fill", options.labelColor || "#000")
-          .text( d.id );
+              .text(function() {
+                  if (options.customLabelText && options.customLabelText[d.id]) {
+                      return options.customLabelText[d.id]
+                  } else {
+                      return d.id
+                  }
+              });
         return "bar";
       });
   }
