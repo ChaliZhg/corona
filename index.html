@@ -53,6 +53,10 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             }
             else
             {
+                if (data[i].Fälle=="")
+                {
+                    data[i].Fälle = 0
+                }
                 anode = 
                 {
                     centered: data[i].Bundesland,
