@@ -2,9 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-    <title>Realtime coronavirus cases in Germany</title>
-
-
+    <title>Realtime reported COVID-19 infections in Germany</title>
 <style type="text/css">
 body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 100%;}
 #canvas {
@@ -57,7 +55,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         }
     };
         document.getElementById('message').innerHTML = 
-        total + " confirmed cases in Germany with "+atSachsen+" at Sachsen.";
+        total + " confirmed infections in Germany with "+atSachsen+" at Sachsen.";
         var dt = new Date();
         document.getElementById('time').innerHTML = 
         dt.toString();
