@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <title>Realtime reported COVID-19 infections in Germany</title>
 <style type="text/css">
-body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 100%;}
+body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 412px;}
 #canvas {
  width: 100%;
  background: #FFFFFF;
@@ -36,7 +36,7 @@ body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 100%;}
     <div id='source'>According to realtime data from zeit.de</div>
     <div id='time'></div>
     <div id='source'>做好防护，积极对待，避免恐慌</div>
-    <div id="canvas" style="height: 350px; width: 100%;text-align: left;"></div>
+    <div id="canvas" style="height: 350px; width: 412px;text-align: left;"></div>
     <script>
     bubbles = [];
     total = 0;
@@ -107,7 +107,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
     setProjection: function (element) {
         var projection = d3.geo.mercator()
             .center([16.5, 52]) // always in [East Latitude, North Longitude]
-            .scale(2500);
+            .scale(2600);
             // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
         var path = d3.geo.path().projection(projection);
         return { path: path, projection: projection };
@@ -128,9 +128,9 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         bubble_map.labels({'customLabelText': custom_text});
     }, 1000);
 
-    window.addEventListener('resize', function() {
-        window.bubble_map.resize();
-    });
+    // window.addEventListener('resize', function() {
+    //     window.bubble_map.resize();
+    // });
 
 
     </script>
