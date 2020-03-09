@@ -44,7 +44,7 @@
 <script src="topojson.min.js"></script>
     <script src="datamaps.deu.js"></script>
     <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
-     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> confirmed infections in Germany with </span><span id ='sachsen_number' style="background: rgb(235, 53, 80); color: white;">if not shown</span><span> at Sachsen </span></h1>
+     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> confirmed infections and </span><span id ='death_number' style="background: black; color: white;">if not shown</span><span> deaths in Germany </span></h1>
     <!-- <div id='source'>According to realtime data from zeit.de</div> -->
     <span>Updated in realtime at </span><span id='time'></span>
     <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
@@ -55,6 +55,7 @@
     <script>
     bubbles = [];
     total = 0;
+    death = 0;
     atSachsen = 0;
     scale = 3;
     custom_text = {};
@@ -76,6 +77,10 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 infected_string = data[i].Fälle.toString();
                 infected_string_split = infected_string.split(' ');
                 infected_number = infected_string_split[0];
+                if(infected_string_split.length>1)
+                {
+                  death += infected_string_split[1].split('(')[1].split(')')[0];
+                }
                 anode = 
                 {
                     centered: data[i].Bundesland,
@@ -114,7 +119,8 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
 
 
         document.getElementById('total_number').innerHTML = total;
-        document.getElementById('sachsen_number').innerHTML = atSachsen;
+        // document.getElementById('sachsen_number').innerHTML = atSachsen;
+        document.getElementById('death_number').innerHTML = death;
 
 });
     var bubble_map = new Datamap({
