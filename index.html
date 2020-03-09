@@ -66,7 +66,12 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         {
             if(data[i].Bundesland=="Summe")
             {
-                total = data[i].Fälle
+                total = data[i].Fälle;
+                death = data[i].Todesfälle;
+                if (death<10)
+                {
+                  death = '0' + death.toString();
+                }
             }
             else
             {
@@ -77,14 +82,14 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 infected_string = data[i].Fälle.toString();
                 infected_string_split = infected_string.split(' ');
                 infected_number = infected_string_split[0];
-                if(infected_string_split.length>1)
-                {
-                  death += infected_string_split[1].split('(')[1].split(')')[0];
-                }
-                if(data[i].Todesfälle!='')
-                {
-                  death += data[i].Todesfälle;
-                }
+                // if(infected_string_split.length>1)
+                // {
+                //   death += infected_string_split[1].split('(')[1].split(')')[0];
+                // }
+                // if(data[i].Todesfälle!='')
+                // {
+                //   death += data[i].Todesfälle;
+                // }
                 anode = 
                 {
                     centered: data[i].Bundesland,
