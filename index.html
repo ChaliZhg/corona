@@ -81,6 +81,10 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 {
                   death += infected_string_split[1].split('(')[1].split(')')[0];
                 }
+                if(data[i].Todesfälle!='')
+                {
+                  death += data[i].Todesfälle;
+                }
                 anode = 
                 {
                     centered: data[i].Bundesland,
