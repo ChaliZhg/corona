@@ -90,7 +90,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 // };
                 // custom_text.push(atext);
                 var myString = data[i].Bundesland;
-                custom_text[myString] = data[i].Bundesland+" ("+data[i].Fälle + ")";
+                custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
 
             }
             if(data[i].Bundesland=="Sachsen")
