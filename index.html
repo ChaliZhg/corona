@@ -1,20 +1,23 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <title>Realtime reported COVID-19 infections in Germany</title>
-<style type="text/css">
-body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 412px;}
-#canvas {
- width: 100%;
- background: #FFFFFF;
- margin: 0 auto;
- border: 0px solid #000000;
- text-align: left;
- left: 0;
-}
-</style>
+
+<!doctype>
+<html>
+  <head>
+    <link href='new.css' rel='stylesheet' type='text/css' />
+<!-- <link href='/assets/syntax.css' rel='stylesheet' type='text/css' /> -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Halant' rel='stylesheet' type='text/css'> -->
+<link href='/favicon.png' rel='icon'>
+<!-- <script src='/assets/jquery.js' type='text/javascript'></script> -->
+<!-- <script src='/assets/stuff.js' type='text/javascript'></script> -->
+
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Realtime reported Covid-19 infections in Gremany</title>
+  <meta content='Realtime reported Covid-19 infections in Gremany' property='og:title' />
+  <meta content='https://teaof.life/corona' property='og:url' />
+  <meta content="Realtime reported Covid-19 infections in Gremany and Sachsen" property='og:description' />
+  <meta content="blog" property="og:type" />
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64121308-2"></script>
@@ -27,16 +30,28 @@ body {margin: 0;padding: 0;text-align: center;background: #FFFFFF;width: 412px;}
 </script>
 
 
-</head>
-<body>
+  </head>
+  <body>
+<!--     <header class="header" data-pjax>
+      <a href="/" class="home js-head" aria-label="Go to home page and switch emoji">&nbsp;</a>
+    </header>
+ -->
+    <div class="wrapper">
+      
+      <div class="sidebar">
+
 <script src="d3.min.js"></script>
 <script src="topojson.min.js"></script>
     <script src="datamaps.deu.js"></script>
-    <h1 id='message'></h1>
-    <div id='source'>According to realtime data from zeit.de</div>
-    <div id='time'></div>
-    <div id='source'>做好防护，积极对待，避免恐慌</div>
-    <div id="canvas" style="height: 350px; width: 412px;text-align: left;"></div>
+    <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
+     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;"></span><span> confirmed infections in Germany with </span><span id ='sachsen_number' style="background: rgb(235, 53, 80); color: white;"></span><span> at Sachsen </span></h1>
+    <!-- <div id='source'>According to realtime data from zeit.de</div> -->
+    <span>Updated in realtime at </span><span id='time'></span>
+    <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
+
+    <div id="wrap-around" style="text-align: center;">
+      <div id="canvas" style="height: 600px; width: 450px; text-align: left;"></div>
+    </div>
     <script>
     bubbles = [];
     total = 0;
@@ -79,11 +94,25 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             {atSachsen = data[i].Fälle}
         }
     };
-        document.getElementById('message').innerHTML = 
-        total + " confirmed infections in Germany with "+atSachsen+" at Sachsen";
-        var dt = new Date();
+        // document.getElementById('message').innerHTML = 
+        // total + " confirmed infections in Germany with "+atSachsen+" at Sachsen";
+        // var dt = new Date();
+        // document.getElementById('time').innerHTML = 
+        // dt.toString();
+
+
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
         document.getElementById('time').innerHTML = 
-        dt.toString();
+        dateTime.toString();
+
+
+
+        document.getElementById('total_number').innerHTML = total;
+        document.getElementById('sachsen_number').innerHTML = atSachsen;
+
 });
     var bubble_map = new Datamap({
         element: document.getElementById('canvas'),
@@ -102,7 +131,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
     low: '#E8E446'
     },
     data: {
-    'Sachsen': { fillKey: 'middle' },
+    'Sachsen': { fillKey: 'defautlFill' },
     },
     setProjection: function (element) {
         var projection = d3.geo.mercator()
@@ -134,6 +163,69 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
 
 
     </script>
-</body>
 
+        <div id="skPlayer"></div>
+        <script src="assets/skPlayer.min.js"></script>
+        <script>
+            var player = new skPlayer({
+                autoplay: false,
+                listshow: false,
+                music: {
+                    type: 'cloud',
+                    source: 9230428
+                }
+            });
+        </script>
+<!--         <embed height="415" width="544" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="http://static.hdslb.com/miniloader.swf" flashvars="aid=7107272&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed> -->
+      </div>
+      
+      <div class="column js-content">
+        
+          <!-- <h3>Writings.</h3>
+<ul class="list" data-pjax>
+
+  <li>
+    <a href="/2016/09/25/relaxing-day/">
+      Fifth day
+      <time>Sep 25, 2016</time>
+    </a>
+  </li>
+  
+  <li>
+    <a href="/2016/09/24/further-update/">
+      Fourth day
+      <time>Sep 24, 2016</time>
+    </a>
+  </li>
+  
+  <li>
+    <a href="/2016/09/23/tired-and-efficient/">
+      Third day
+      <time>Sep 23, 2016</time>
+    </a>
+  </li>
+  
+  <li>
+    <a href="/2016/09/22/accept-myself/">
+      First day
+      <time>Sep 22, 2016</time>
+    </a>
+  </li>
+  
+  <li>
+    <a href="/2016/09/21/start/">
+      Go
+      <time>Sep 21, 2016</time>
+    </a>
+  </li>
+  
+</ul> -->
+
+        
+      </div>
+    </div>
+    <footer class="footer">
+      做好防护，积极对待，避免恐慌
+    </footer>
+  </body>
 </html>
