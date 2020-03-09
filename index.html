@@ -73,12 +73,15 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 {
                     data[i].Fälle = 0
                 }
+                infected_string = data[i].Fälle.toString();
+                infected_string_split = infected_string.split(' ');
+                infected_number = infected_string_split[0];
                 anode = 
                 {
                     centered: data[i].Bundesland,
                     fillKey: "high",
-                    radius: Math.sqrt(data[i].Fälle)*scale,
-                    value:data[i].Fälle
+                    radius: Math.sqrt(infected_number)*scale,
+                    value:infected_number
                 };
                 bubbles.push(anode);
                 // atext = 
