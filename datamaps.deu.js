@@ -399,8 +399,8 @@
 
         if ( ["FL", "KY", "MI"].indexOf(d.id) > -1 ) xOffset = -2.5;
         if ( d.id === "NY" ) xOffset = -1;
-        if ( d.id === "MI" ) yOffset = 18;
-        if ( d.id === "LA" ) xOffset = 13;
+        if ( d.id === "Berlin" ) yOffset = 0;
+        if ( d.id === "Brandenburg" ) yOffset = 25;
 
         var x,y;
 
@@ -426,6 +426,7 @@
           .attr("y", y)
           .style("font-size", (options.fontSize || 10) + 'px')
           .style("font-family", options.fontFamily || "Verdana")
+          .style("text-align", 'left')
           .style("fill", options.labelColor || "#000")
               .text(function() {
                   if (options.customLabelText && options.customLabelText[d.id]) {
