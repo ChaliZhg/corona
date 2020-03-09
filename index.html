@@ -132,33 +132,49 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         document.getElementById('death_number').innerHTML = death;
 
 });
-    var bubble_map = new Datamap({
+    var bubble_map = new Datamap(
+    {
         element: document.getElementById('canvas'),
         scope: 'deu',
         responsive: true,
-        geographyConfig: {
+        geographyConfig:
+        {
             popupOnHover: true,
             highlightOnHover: true,
             borderColor: '#444',
             borderWidth: 0.5,
         },
-    fills: {
-    defaultFill: "#dddddd",
-    high: '#EB3550',
-    middle: '#3C94EB',
-    low: '#E8E446'
-    },
+        fills:
+        {
+            defaultFill: "#dddddd",
+            high: '#EB3550',
+            middle: '#3C94EB',
+            low: '#E8E446'
+        },
+        bubblesConfig:
+        {
+            borderWidth: 0,
+            borderOpacity: 1, 
+            borderColor: '#FFFFFF',
+            popupOnHover: true,
+            radius: null,
+            popupTemplate: function(geography, data)
+            {
+            return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+            },
+        },
     // data: {
     // 'Sachsen': { fillKey: 'defautlFill' },
     // },
-    setProjection: function (element) {
-        var projection = d3.geo.mercator()
-            .center([16.5, 52]) // always in [East Latitude, North Longitude]
-            .scale(2600);
-            // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-        var path = d3.geo.path().projection(projection);
-        return { path: path, projection: projection };
-    }
+      setProjection: function (element)
+      {
+          var projection = d3.geo.mercator()
+              .center([16.5, 52]) // always in [East Latitude, North Longitude]
+              .scale(2600);
+              // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+          var path = d3.geo.path().projection(projection);
+          return { path: path, projection: projection };
+      }
     });
 
 
@@ -172,7 +188,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
             }
         });
-        bubble_map.labels({'customLabelText': custom_text});
+        bubble_map.labels({'customLabelText': custom_text, "fontSize": 14,});
     }, 1000);
 
     // window.addEventListener('resize', function() {
