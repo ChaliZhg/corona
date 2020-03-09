@@ -98,6 +98,20 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                     value:infected_number
                 };
                 bubbles.push(anode);
+
+                if (data[i].Todesfälle!='') {
+                  console.log('got you');
+                  anode =
+                  {
+                      centered: data[i].Bundesland,
+                      fillKey: "low",
+                      radius: Math.sqrt(data[i].Todesfälle)*scale,
+                      value:data[i].Todesfälle
+                  };
+                  bubbles.push(anode);
+                }
+
+
                 // atext = 
                 // {
                 //     data[i].Bundesland:data[i].Bundesland+data[i].Fälle
@@ -149,7 +163,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             defaultFill: "#dddddd",
             high: '#EB3550',
             middle: '#3C94EB',
-            low: '#E8E446'
+            low: '#4D4D4D',
         },
         bubblesConfig:
         {
@@ -188,7 +202,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
             }
         });
-        bubble_map.labels({'customLabelText': custom_text, "fontSize": 14,});
+        bubble_map.labels({'customLabelText': custom_text, "fontSize": 10});
     }, 1000);
 
     // window.addEventListener('resize', function() {
