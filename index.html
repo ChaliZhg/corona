@@ -46,7 +46,7 @@
     <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
      <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> confirmed infections and </span><span id ='death_number' style="background: #4D4D4D; color: white;">if not shown</span><span> deaths in Germany </span></h1>
     <!-- <div id='source'>According to realtime data from zeit.de</div> -->
-    <span>Updated in realtime at </span><span id='time'></span>
+    <span>Last updated at </span><span id='time'></span>
     <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
 
     <div id="wrap-around" style="text-align: center;">
@@ -59,6 +59,7 @@
     atSachsen = 0;
     scale = 3;
     custom_text = {};
+    timeString = '';
 
 d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data){
     for (var i = data.length - 1; i >= 0; i--) {
@@ -72,6 +73,10 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 {
                   death = '0' + death.toString();
                 }
+            }
+            else if(data[i].Bundesland=="Letzte Änderung")
+            {
+              timeString = data[i].Fälle;
             }
             else
             {
@@ -132,12 +137,15 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         // dt.toString();
 
 
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
-        document.getElementById('time').innerHTML = 
-        dateTime.toString();
+      // var today = new Date();
+      // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      // var dateTime = date+' '+time;
+        // document.getElementById('time').innerHTML = 
+        // dateTime.toString();
+
+
+        document.getElementById('time').innerHTML = timeString;
 
 
 
