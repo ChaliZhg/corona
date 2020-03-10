@@ -44,7 +44,7 @@
 <script src="topojson.min.js"></script>
     <script src="datamaps.deu.js"></script>
     <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
-     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> confirmed infections and </span><span id ='death_number' style="background: #4D4D4D; color: white;">if not shown</span><span> deaths in Germany </span></h1>
+     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> infections, </span><span id ='recovery_number' style="background: #1EEBC0; color: white;">to</span><span> recoveries and </span><span id ='death_number' style="background: #4D4D4D; color: white;">load data</span><span> deaths in Germany</span></h1>
     <!-- <div id='source'>According to realtime data from zeit.de</div> -->
     <span>Source: zeit.de, updated at </span><span id='time'></span>
     <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
@@ -56,6 +56,7 @@
     bubbles = [];
     total = 0;
     death = 0;
+    recovery = 0;
     atSachsen = 0;
     scale = 3;
     custom_text = {};
@@ -69,6 +70,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             {
                 total = data[i].Fälle;
                 death = data[i].Todesfälle;
+                recovery = data[i].Genesene;
                 if (death<10)
                 {
                   death = '0' + death.toString();
@@ -105,7 +107,6 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 bubbles.push(anode);
 
                 if (data[i].Todesfälle!='') {
-                  console.log('got you');
                   anode =
                   {
                       centered: data[i].Bundesland,
@@ -115,7 +116,17 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                   };
                   bubbles.push(anode);
                 }
-
+                if (data[i].Genesene!='') {
+                  console.log('got you');
+                  anode =
+                  {
+                      centered: data[i].Bundesland,
+                      fillKey: "middle",
+                      radius: Math.sqrt(data[i].Genesene)*scale,
+                      value:data[i].Genesene
+                  };
+                  bubbles.push(anode);
+                }
 
                 // atext = 
                 // {
@@ -152,6 +163,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         document.getElementById('total_number').innerHTML = total;
         // document.getElementById('sachsen_number').innerHTML = atSachsen;
         document.getElementById('death_number').innerHTML = death;
+        document.getElementById('recovery_number').innerHTML = recovery;
 
 });
     var bubble_map = new Datamap(
@@ -170,7 +182,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         {
             defaultFill: "#dddddd",
             high: '#EB3550',
-            middle: '#3C94EB',
+            middle: '#1EEBC0',
             low: '#4D4D4D',
         },
         bubblesConfig:
