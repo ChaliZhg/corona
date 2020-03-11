@@ -401,7 +401,8 @@
         if ( d.id === "NY" ) xOffset = -1;
         if ( d.id === "Berlin" ) yOffset = 0;
         if ( d.id === "Mecklenburg-Vorpommern" ) xOffset += 80;
-        if ( d.id === "Brandenburg" ) {xOffset+= 10; yOffset = 25;}
+        if ( d.id === "Brandenburg" ) {xOffset+= 10; yOffset = 35;}
+        if ( d.id === "Sachsen-Anhalt" ) {xOffset+= 20; yOffset = 35;}
         if ( d.id === "Nordrhein-Westfalen" ) {xOffset = 35; yOffset = 25;}
 
         if ( d.id === "Baden-Württemberg") {xOffset = 25;}
@@ -467,6 +468,10 @@
           }
           else if ( datum.centered ) {
             latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+            if (datum.centered=="Brandenburg")
+            {
+              latLng[0] += 20;
+            }
           }
           if ( latLng ) return latLng[0];
         })
@@ -477,6 +482,11 @@
           }
           else if ( datum.centered ) {
             latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+            if (datum.centered=="Brandenburg")
+            {
+              console.log(latLng);
+              latLng[1] += 30;
+            }
           }
           if ( latLng ) return latLng[1];
         })
