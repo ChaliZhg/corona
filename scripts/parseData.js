@@ -110,7 +110,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           {
             defaultFill: "#dddddd",
             high: '#EB3550',
-            middle: '#1EEBC0',
+            middle: '#6FE88E',
             low: '#4D4D4D',
             subhigh: '#EBA19E',
           },
