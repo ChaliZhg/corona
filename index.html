@@ -1,17 +1,10 @@
-
 <!doctype>
 <html>
-  <head>
-    <link href='new.css' rel='stylesheet' type='text/css' />
-<!-- <link href='/assets/syntax.css' rel='stylesheet' type='text/css' /> -->
-<!-- <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Halant' rel='stylesheet' type='text/css'> -->
-<link href='favicon.png' rel='icon'>
-<!-- <script src='/assets/jquery.js' type='text/javascript'></script> -->
-<!-- <script src='/assets/stuff.js' type='text/javascript'></script> -->
-
-<meta content='width=device-width, initial-scale=1.0' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+<head>
+  <link href='new.css' rel='stylesheet' type='text/css' />
+  <link href='favicon.png' rel='icon'>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+  <meta content='text/html; charset=utf-8' http-equiv='content-type' />
 
   <title>Realtime reported Covid-19 infections in Gremany</title>
   <meta content='Realtime reported Covid-19 infections in Gremany' property='og:title' />
@@ -19,55 +12,49 @@
   <meta content="Realtime reported Covid-19 infections in Gremany and Sachsen" property='og:description' />
   <meta content="blog" property="og:type" />
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-64121308-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64121308-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'UA-64121308-2');
-</script>
+    gtag('config', 'UA-64121308-2');
+  </script>
 
+</head>
+<body>
+  <div class="wrapper">
 
-  </head>
-  <body>
-<!--     <header class="header" data-pjax>
-      <a href="/" class="home js-head" aria-label="Go to home page and switch emoji">&nbsp;</a>
-    </header>
- -->
-    <div class="wrapper">
-      
-      <div class="sidebar">
+    <div class="sidebar">
 
-<script src="d3.min.js"></script>
-<script src="topojson.min.js"></script>
-    <script src="datamaps.deu.js"></script>
-    <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
-     <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> infections, </span><span id ='recovery_number' style="background: #1EEBC0; color: white;">to</span><span> recoveries and </span><span id ='death_number' style="background: #4D4D4D; color: white;">load data</span><span> deaths in Germany</span></h1>
-    <!-- <div id='source'>According to realtime data from zeit.de</div> -->
-    <span>Source: zeit.de, updated at </span><span id='time'></span>
-    <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
+      <script src="d3.min.js"></script>
+      <script src="topojson.min.js"></script>
+      <script src="datamaps.deu.js"></script>
+      <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
+      <h1><span id ='total_number' style="background: rgb(235, 53, 80); color: white;">Refresh</span><span> infections, </span><span id ='recovery_number' style="background: #1EEBC0; color: white;">to</span><span> recoveries and </span><span id ='death_number' style="background: #4D4D4D; color: white;">load data</span><span> deaths in Germany</span></h1>
+      <!-- <div id='source'>According to realtime data from zeit.de</div> -->
+      <span>Source: zeit.de, updated at </span><span id='time'></span>
+      <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
 
-    <div id="wrap-around" style="text-align: center;">
-      <div id="canvas" style="height: 600px; width: 450px; text-align: left;"></div>
-    </div>
-    <script>
-    bubbles = [];
-    total = 0;
-    death = 0;
-    recovery = 0;
-    atSachsen = 0;
-    scale = 3;
-    custom_text = {};
-    timeString = '';
+      <div id="wrap-around" style="text-align: center;">
+        <div id="canvas" style="height: 600px; width: 450px; text-align: left;"></div>
+      </div>
+      <script>
+        bubbles = [];
+        total = 0;
+        death = 0;
+        recovery = 0;
+        scale = 3;
+        custom_text = {};
+        timeString = '';
 
-d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data){
-    for (var i = data.length - 1; i >= 0; i--) {
-        if(data[i].Bundesland.length>0)
-        {
-            if(data[i].Bundesland=="Summe")
+        d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data){
+          for (var i = data.length - 1; i >= 0; i--) {
+            if(data[i].Bundesland.length>0)
             {
+              if(data[i].Bundesland=="Summe")
+              {
                 total = data[i].Fälle;
                 death = data[i].Todesfälle;
                 recovery = data[i].Genesene;
@@ -75,193 +62,112 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
                 {
                   death = '0' + death.toString();
                 }
-            }
-            else if(data[i].Bundesland=="Letzte Änderung")
-            {
-              timeString = data[i].Fälle;
-            }
-            else
-            {
+              }
+              else if(data[i].Bundesland=="Letzte Änderung")
+              {
+                timeString = data[i].Fälle;
+              }
+              else
+              {
                 if (data[i].Fälle=="")
                 {
-                    data[i].Fälle = 0
+                  data[i].Fälle = 0
                 }
                 infected_string = data[i].Fälle.toString();
                 infected_string_split = infected_string.split(' ');
                 infected_number = infected_string_split[0];
-                // if(infected_string_split.length>1)
-                // {
-                //   death += infected_string_split[1].split('(')[1].split(')')[0];
-                // }
-                // if(data[i].Todesfälle!='')
-                // {
-                //   death += data[i].Todesfälle;
-                // }
                 anode = 
                 {
-                    centered: data[i].Bundesland,
-                    fillKey: "high",
-                    radius: Math.sqrt(infected_number)*scale,
-                    value:infected_number
+                  centered: data[i].Bundesland,
+                  fillKey: "high",
+                  radius: Math.sqrt(infected_number)*scale,
+                  value:infected_number
                 };
                 bubbles.push(anode);
 
                 if (data[i].Todesfälle!='') {
                   anode =
                   {
-                      centered: data[i].Bundesland,
-                      fillKey: "low",
-                      radius: Math.sqrt(data[i].Todesfälle)*scale,
-                      value:data[i].Todesfälle
+                    centered: data[i].Bundesland,
+                    fillKey: "low",
+                    radius: Math.sqrt(data[i].Todesfälle)*scale,
+                    value:data[i].Todesfälle
                   };
                   bubbles.push(anode);
                 }
                 if (data[i].Genesene!='') {
-                  console.log('got you');
                   anode =
                   {
-                      centered: data[i].Bundesland,
-                      fillKey: "middle",
-                      radius: Math.sqrt(data[i].Genesene)*scale,
-                      value:data[i].Genesene
+                    centered: data[i].Bundesland,
+                    fillKey: "middle",
+                    radius: Math.sqrt(data[i].Genesene)*scale,
+                    value:data[i].Genesene
                   };
                   bubbles.push(anode);
                 }
-
-                // atext = 
-                // {
-                //     data[i].Bundesland:data[i].Bundesland+data[i].Fälle
-                // };
-                // custom_text.push(atext);
                 var myString = data[i].Bundesland;
                 custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
 
+              }
             }
-            if(data[i].Bundesland=="Sachsen")
-            {atSachsen = data[i].Fälle}
-
-
-
-
-          // for (var i = sachsenData.length - 1; i >= 0; i--) {
-          //   // console.log(sachsenData[i]);
-          // }
-          // customLatLng["leipzig"] = {latitude: 51.3, longitude: 12.4,}
-          // customLatLng["dresden"] = {latitude: 51.05, longitude: 13.7,}
-
-            // bubbles.push(
-            // { //leipzig
-            //   radius: 40,
-            //   latitude: 51.3,
-            //   longitude: 12.4,
-            //   fillKey: "low",
-            // }
-            // )
-
-
-            // bubbles.push(
-            // {//dresden
-            //   radius: 40,
-            //   latitude: 51.05,
-            //   longitude: 13.7,
-            //   fillKey: "low",
-            // }
-            // )
-
-            // bubbles.push(
-            // {//dresden
-            //   radius: 40,
-            //   latitude: 51.05,
-            //   longitude: 13.7,
-            //   fillKey: "low",
-            // }
-            // )
-
-        }
-
-
-
-
-    };
-        // document.getElementById('message').innerHTML = 
-        // total + " confirmed infections in Germany with "+atSachsen+" at Sachsen";
-        // var dt = new Date();
-        // document.getElementById('time').innerHTML = 
-        // dt.toString();
-
-
-      // var today = new Date();
-      // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      // var dateTime = date+' '+time;
-        // document.getElementById('time').innerHTML = 
-        // dateTime.toString();
-
+          };
           sachsenData = [
-            {name: "Dresden",  latitude: 51.05, longitude: 13.70, infections: 4,},
-            {name: "Chemnitz", latitude: 50.82, longitude: 12.92, infections: 3,},
-            {name: "Stadt Leipzig",  latitude: 51.34, longitude: 12.37, infections: 4,},
-            {name: "Bautzen",  latitude: 51.18, longitude: 14.43, infections: 6,},
-            {name: "Görlitz",  latitude: 51.16, longitude: 14.99, infections: 2,},
-            {name: "Landkreis Leipzig",  latitude: 51.21, longitude: 12.47, infections: 4,},
-            {name: "Meißen",   latitude: 51.16, longitude: 13.47, infections: 3},
-            {name: "Mittelsachsen",   latitude: 50.97, longitude: 13.12, infections: 0,},
-            {name: "Nordsachsen", latitude: 51.53, longitude: 12.75, infections: 0,},
-            {name: "Sächsische-Schweiz-Osterzgebirge", latitude: 50.90, longitude: 13.87, infections: 2,},
-            {name: "Vogtlandkreis", latitude: 50.49, longitude: 12.27, infections: 0,},
-            {name: "Zwickau",       latitude: 50.75, longitude: 12.50, infections: 0,},
+          {name: "Dresden",  latitude: 51.05, longitude: 13.70, infections: 4,},
+          {name: "Chemnitz", latitude: 50.82, longitude: 12.92, infections: 3,},
+          {name: "Stadt Leipzig",  latitude: 51.34, longitude: 12.37, infections: 4,},
+          {name: "Bautzen",  latitude: 51.18, longitude: 14.43, infections: 6,},
+          {name: "Görlitz",  latitude: 51.16, longitude: 14.99, infections: 2,},
+          {name: "Landkreis Leipzig",  latitude: 51.21, longitude: 12.47, infections: 4,},
+          {name: "Meißen",   latitude: 51.16, longitude: 13.47, infections: 3},
+          {name: "Mittelsachsen",   latitude: 50.97, longitude: 13.12, infections: 0,},
+          {name: "Nordsachsen", latitude: 51.53, longitude: 12.75, infections: 0,},
+          {name: "Sächsische-Schweiz-Osterzgebirge", latitude: 50.90, longitude: 13.87, infections: 2,},
+          {name: "Vogtlandkreis", latitude: 50.49, longitude: 12.27, infections: 0,},
+          {name: "Zwickau",       latitude: 50.75, longitude: 12.50, infections: 0,},
           ];
 
-          for (var i = sachsenData.length - 1; i >= 0; i--) {
-
+          for (var i = sachsenData.length - 1; i >= 0; i--)
+          {
             anode =
             {
-                latitude: sachsenData[i].latitude,
-                longitude: sachsenData[i].longitude,
-                fillKey: "subhigh",
-                radius: Math.sqrt(sachsenData[i].infections)*scale,
-                value: sachsenData[i].infections,
-                centered: sachsenData[i].name,
+              latitude: sachsenData[i].latitude,
+              longitude: sachsenData[i].longitude,
+              fillKey: "subhigh",
+              radius: Math.sqrt(sachsenData[i].infections)*scale,
+              value: sachsenData[i].infections,
+              centered: sachsenData[i].name,
             };
             bubbles.push(anode);
 
-
-            // console.log(sachsenData[i]);
           }
+          document.getElementById('time').innerHTML = timeString;
+          document.getElementById('total_number').innerHTML = total;
+          document.getElementById('death_number').innerHTML = death;
+          document.getElementById('recovery_number').innerHTML = recovery;
 
-
-        document.getElementById('time').innerHTML = timeString;
-
-
-
-        document.getElementById('total_number').innerHTML = total;
-        // document.getElementById('sachsen_number').innerHTML = atSachsen;
-        document.getElementById('death_number').innerHTML = death;
-        document.getElementById('recovery_number').innerHTML = recovery;
-
-});
-    var bubble_map = new Datamap(
-    {
-        element: document.getElementById('canvas'),
-        scope: 'deu',
-        responsive: true,
-        geographyConfig:
+        });
+        var bubble_map = new Datamap(
         {
+          element: document.getElementById('canvas'),
+          scope: 'deu',
+          responsive: true,
+          geographyConfig:
+          {
             popupOnHover: true,
             highlightOnHover: false,
             borderColor: '#444',
             borderWidth: 0.5,
-        },
-        fills:
-        {
+          },
+          fills:
+          {
             defaultFill: "#dddddd",
             high: '#EB3550',
             middle: '#1EEBC0',
             low: '#4D4D4D',
             subhigh: '#EBA19E',
-        },
-        bubblesConfig:
-        {
+          },
+          bubblesConfig:
+          {
             fillOpacity:0.75,
             borderWidth: 0,
             borderOpacity: 1, 
@@ -270,46 +176,44 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             radius: null,
             popupTemplate: function(geography, data)
             {
-            return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+              return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
             },
-        },
+          },
     // data: {
     // 'Sachsen': { fillKey: 'defautlFill' },
     // },
-      setProjection: function (element)
-      {
-          var projection = d3.geo.mercator()
+    setProjection: function (element)
+    {
+      var projection = d3.geo.mercator()
               .center([16.5, 52]) // always in [East Latitude, North Longitude]
               .scale(2600);
               // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-          var path = d3.geo.path().projection(projection);
-          return { path: path, projection: projection };
-      }
-    });
-
-
-    // bubble_map.labels();
+              var path = d3.geo.path().projection(projection);
+              return { path: path, projection: projection };
+            }
+          });
 
     //ISO ID code for city or <state></state>
-    setTimeout(() => { // only start drawing bubbles on the map when map has rendered completely.
+    setTimeout(() => { 
+        // only start drawing bubbles on the map when map has rendered completely.
         // bubble_map.labels({'customLabelText': custom_text});
         bubble_map.bubbles(bubbles, {
-            popupTemplate: function (geo, data) {
-                return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-            }
+          popupTemplate: function (geo, data) {
+            return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+          }
         });
         bubble_map.labels({'customLabelText': custom_text, "fontSize": 15});
-    }, 1000);
+      }, 1000);
 
     </script>
-      </div>
-      
-      <div class="column js-content">
-        
-      </div>
-    </div>
+  </div>
+
+  <div class="column js-content">
+
+  </div>
+</div>
 <!--     <footer class="footer">
       做好防护，积极对待，避免恐慌
     </footer> -->
   </body>
-</html>
+  </html>
