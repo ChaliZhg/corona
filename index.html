@@ -139,7 +139,49 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             }
             if(data[i].Bundesland=="Sachsen")
             {atSachsen = data[i].Fälle}
+
+
+
+
+          // for (var i = sachsenData.length - 1; i >= 0; i--) {
+          //   // console.log(sachsenData[i]);
+          // }
+          // customLatLng["leipzig"] = {latitude: 51.3, longitude: 12.4,}
+          // customLatLng["dresden"] = {latitude: 51.05, longitude: 13.7,}
+
+            // bubbles.push(
+            // { //leipzig
+            //   radius: 40,
+            //   latitude: 51.3,
+            //   longitude: 12.4,
+            //   fillKey: "low",
+            // }
+            // )
+
+
+            // bubbles.push(
+            // {//dresden
+            //   radius: 40,
+            //   latitude: 51.05,
+            //   longitude: 13.7,
+            //   fillKey: "low",
+            // }
+            // )
+
+            // bubbles.push(
+            // {//dresden
+            //   radius: 40,
+            //   latitude: 51.05,
+            //   longitude: 13.7,
+            //   fillKey: "low",
+            // }
+            // )
+
         }
+
+
+
+
     };
         // document.getElementById('message').innerHTML = 
         // total + " confirmed infections in Germany with "+atSachsen+" at Sachsen";
@@ -154,6 +196,37 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
       // var dateTime = date+' '+time;
         // document.getElementById('time').innerHTML = 
         // dateTime.toString();
+
+          sachsenData = [
+            {name: "Dresden",  latitude: 51.05, longitude: 13.70, infections: 3,},
+            {name: "Chemnitz", latitude: 50.82, longitude: 12.92, infections: 3,},
+            {name: "Leipzig",  latitude: 51.34, longitude: 12.37, infections: 7,},
+            {name: "Bautzen",  latitude: 51.18, longitude: 14.43, infections: 7,},
+            {name: "Görlitz",  latitude: 51.16, longitude: 14.99, infections: 3,},
+            {name: "Meißen",   latitude: 51.16, longitude: 13.47, infections: 1},
+            {name: "Mittelsachsen",   latitude: 50.97, longitude: 13.12, infections: 0,},
+            {name: "Nordsachsen", latitude: 51.53, longitude: 12.75, infections: 0,},
+            {name: "Sächsische-Schweiz-Osterzgebirge", latitude: 50.90, longitude: 13.87, infections: 2,},
+            {name: "Vogtlandkreis", latitude: 50.49, longitude: 12.27, infections: 0,},
+            {name: "Zwickau",       latitude: 50.75, longitude: 12.50, infections: 0,},
+          ];
+
+          for (var i = sachsenData.length - 1; i >= 0; i--) {
+
+            anode =
+            {
+                latitude: sachsenData[i].latitude,
+                longitude: sachsenData[i].longitude,
+                fillKey: "subhigh",
+                radius: Math.sqrt(sachsenData[i].infections)*scale,
+                value: sachsenData[i].infections,
+                centered: sachsenData[i].name,
+            };
+            bubbles.push(anode);
+
+
+            // console.log(sachsenData[i]);
+          }
 
 
         document.getElementById('time').innerHTML = timeString;
@@ -174,7 +247,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         geographyConfig:
         {
             popupOnHover: true,
-            highlightOnHover: true,
+            highlightOnHover: false,
             borderColor: '#444',
             borderWidth: 0.5,
         },
@@ -184,6 +257,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             high: '#EB3550',
             middle: '#1EEBC0',
             low: '#4D4D4D',
+            subhigh: '#EB6871',
         },
         bubblesConfig:
         {
