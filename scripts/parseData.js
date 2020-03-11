@@ -77,7 +77,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
 });
 
         //read in sachsen data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/sachsen.csv", function(data)
+        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen.csv", function(data)
         {
           for (var i = data.length - 1; i >= 0; i--)
           {
