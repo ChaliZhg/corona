@@ -401,7 +401,7 @@
         if ( d.id === "NY" ) xOffset = -1;
         if ( d.id === "Berlin" ) yOffset = 0;
         if ( d.id === "Mecklenburg-Vorpommern" ) xOffset += 80;
-        if ( d.id === "Brandenburg" ) yOffset = 25;
+        if ( d.id === "Brandenburg" ) {xOffset+= 10; yOffset = 25;}
         if ( d.id === "Nordrhein-Westfalen" ) {xOffset = 35; yOffset = 25;}
 
         if ( d.id === "Baden-Württemberg") {xOffset = 25;}
