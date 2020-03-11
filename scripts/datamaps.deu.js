@@ -402,10 +402,18 @@
         if ( d.id === "Berlin" ) yOffset = 0;
         if ( d.id === "Mecklenburg-Vorpommern" ) xOffset += 80;
         if ( d.id === "Brandenburg" ) {xOffset+= 10; yOffset = 35;}
-        if ( d.id === "Sachsen-Anhalt" ) {xOffset+= 20; yOffset = 35;}
-        if ( d.id === "Nordrhein-Westfalen" ) {xOffset = 35; yOffset = 25;}
-
-        if ( d.id === "Baden-Württemberg") {xOffset = 25;}
+        if ( d.id === "Sachsen-Anhalt" ) {xOffset+= 40; yOffset = 20;}
+        if ( d.id === "Nordrhein-Westfalen" ) {xOffset += 55; yOffset = 25;}
+        if ( d.id === "Thüringen" ) {xOffset += 25;}
+        if ( d.id === "Baden-Württemberg") {xOffset += 55;}
+        if ( d.id === "Niedersachsen") {xOffset += 45;}
+        if ( d.id === "Sachsen" ) {xOffset+= 20;}
+        if ( d.id === "Hamburg" ) {xOffset+= 20;}
+        if ( d.id === "Bremen" ) {xOffset+= 20;}
+        if ( d.id === "Schleswig-Holstein" ) {xOffset+= 30;}
+        if ( d.id === "Bayern" ) {xOffset+= 20;}
+        if ( d.id === "Rheinland-Pfalz" ) {xOffset+= 20;}
+        if ( d.id === "Hessen" ) {xOffset+= 15;}
 
         var x,y;
 
