@@ -49,7 +49,8 @@
         custom_text = {};
         timeString = '';
 
-        d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data){
+        d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data)
+        {
           for (var i = data.length - 1; i >= 0; i--) {
             if(data[i].Bundesland.length>0)
             {
@@ -111,41 +112,31 @@
               }
             }
           };
-          sachsenData = [
-          {name: "Dresden",  latitude: 51.05, longitude: 13.70, infections: 4,},
-          {name: "Chemnitz", latitude: 50.82, longitude: 12.92, infections: 3,},
-          {name: "Stadt Leipzig",  latitude: 51.34, longitude: 12.37, infections: 4,},
-          {name: "Bautzen",  latitude: 51.18, longitude: 14.43, infections: 6,},
-          {name: "Görlitz",  latitude: 51.16, longitude: 14.99, infections: 2,},
-          {name: "Landkreis Leipzig",  latitude: 51.21, longitude: 12.47, infections: 4,},
-          {name: "Meißen",   latitude: 51.16, longitude: 13.47, infections: 3},
-          {name: "Mittelsachsen",   latitude: 50.97, longitude: 13.12, infections: 0,},
-          {name: "Nordsachsen", latitude: 51.53, longitude: 12.75, infections: 0,},
-          {name: "Sächsische-Schweiz-Osterzgebirge", latitude: 50.90, longitude: 13.87, infections: 2,},
-          {name: "Vogtlandkreis", latitude: 50.49, longitude: 12.27, infections: 0,},
-          {name: "Zwickau",       latitude: 50.75, longitude: 12.50, infections: 0,},
-          ];
-
-          for (var i = sachsenData.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: sachsenData[i].latitude,
-              longitude: sachsenData[i].longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(sachsenData[i].infections)*scale,
-              value: sachsenData[i].infections,
-              centered: sachsenData[i].name,
-            };
-            bubbles.push(anode);
-
-          }
           document.getElementById('time').innerHTML = timeString;
           document.getElementById('total_number').innerHTML = total;
           document.getElementById('death_number').innerHTML = death;
           document.getElementById('recovery_number').innerHTML = recovery;
 
         });
+
+        //read in sachsen data
+        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/sachsen.csv", function(data)
+        {
+          for (var i = data.length - 1; i >= 0; i--)
+          {
+            anode =
+            {
+              latitude: data[i].Latitude,
+              longitude: data[i].Longitude,
+              fillKey: "subhigh",
+              radius: Math.sqrt(data[i].Fälle)*scale,
+              value: data[i].Fälle,
+              centered: data[i].Bundesland,
+            };
+            bubbles.push(anode);
+          }
+        });
+
         var bubble_map = new Datamap(
         {
           element: document.getElementById('canvas'),
