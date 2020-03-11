@@ -89,6 +89,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
               radius: Math.sqrt(data[i].Fälle)*scale,
               value: data[i].Fälle,
               centered: data[i].Bundesland,
+              borderWidth: 0.5,
             };
             bubbles.push(anode);
           }
