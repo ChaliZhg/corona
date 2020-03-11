@@ -484,7 +484,6 @@
             latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
             if (datum.centered=="Brandenburg")
             {
-              console.log(latLng);
               latLng[1] += 30;
             }
           }
