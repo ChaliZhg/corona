@@ -137,12 +137,12 @@ var bubble_map = new Datamap(
     high: '#EB3550',
     middle: '#6FE88E',
     low: '#4D4D4D',
-    subhigh: '#EBA19E',
+    subhigh: '#EB3550', //EBA19E
   },
   bubblesConfig:
   {
     fillOpacity:0.75,
-    borderWidth: 0,
+    borderWidth: 1.5,
     borderOpacity: 1, 
     borderColor: '#FFFFFF',
     popupOnHover: true,
@@ -170,19 +170,23 @@ return { path: path, projection: projection };
 
 //ISO ID code for city or <state></state>
 setTimeout(() => {
-  bubbles = national_bubbles.concat(state_bubbles);
-  bubbles.sort(function (a, b) {
+
+  national_bubbles.sort(function (a, b) {
     if (a.type > b.type) {
         return -1;
     }
     if (b.type > a.type) {
         return 1;
     }
+    return 0;
+  });
+
+  state_bubbles.sort(function (a, b) {
     if (a.value > b.value) {
-        return 1;
+        return -1;
     }
     if (b.value > a.value) {
-        return -1;
+        return 1;
     }
     return 0;
   });
