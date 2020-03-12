@@ -1,10 +1,12 @@
-bubbles = [];
 total = 0;
 death = 0;
 recovery = 0;
 scale = 3;
 custom_text = {};
 timeString = '';
+
+national_bubbles = [];
+state_bubbles = [];
 
 d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data)
 {
@@ -41,7 +43,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           radius: Math.sqrt(infected_number)*scale,
           value:infected_number
         };
-        bubbles.push(anode);
+        national_bubbles.push(anode);
 
         if (data[i].Todesfälle!='') {
           anode =
@@ -51,7 +53,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             radius: Math.sqrt(data[i].Todesfälle)*scale,
             value:data[i].Todesfälle
           };
-          bubbles.push(anode);
+          national_bubbles.push(anode);
         }
         if (data[i].Genesene!='') {
           anode =
@@ -61,7 +63,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             radius: Math.sqrt(data[i].Genesene)*scale,
             value:data[i].Genesene
           };
-          bubbles.push(anode);
+          national_bubbles.push(anode);
         }
         var myString = data[i].Bundesland;
         custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
@@ -91,7 +93,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen.cs
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 
@@ -110,7 +112,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen-an
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 
@@ -129,7 +131,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/hessen.csv
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 
@@ -148,7 +150,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/bayern.csv
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 
@@ -167,7 +169,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/baden-wuer
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 
@@ -186,7 +188,7 @@ d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/niedersach
       centered: data[i].Bundesland,
       borderWidth: 0.5,
     };
-    bubbles.push(anode);
+    state_bubbles.push(anode);
   }
 });
 var bubble_map = new Datamap(
@@ -236,8 +238,11 @@ return { path: path, projection: projection };
 }
 });
 
+
+
 //ISO ID code for city or <state></state>
 setTimeout(() => { 
+  bubbles = national_bubbles.concat(state_bubbles);
 // only start drawing bubbles on the map when map has rendered completely.
 // bubble_map.labels({'customLabelText': custom_text});
 bubble_map.bubbles(bubbles, {
