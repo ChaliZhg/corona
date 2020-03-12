@@ -191,5 +191,5 @@ bubble_map.bubbles(bubbles, {
     return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
   }
 });
-bubble_map.labels({'customLabelText': custom_text, "fontSize": 25, "fontFamily": "'Source Sans Pro', Arial, Helvetica, sans-serif;"});
+bubble_map.labels({'customLabelText': custom_text, "fontSize": 25, "fontFamily": "Source Sans Pro"});
 }, 1500);
