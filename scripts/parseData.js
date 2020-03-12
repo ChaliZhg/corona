@@ -114,6 +114,25 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           }
         });
 
+        //read in hessen data
+        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/hessen.csv", function(data)
+        {
+          for (var i = data.length - 1; i >= 0; i--)
+          {
+            anode =
+            {
+              latitude: data[i].Latitude,
+              longitude: data[i].Longitude,
+              fillKey: "subhigh",
+              radius: Math.sqrt(data[i].Fälle)*scale,
+              value: data[i].Fälle,
+              centered: data[i].Bundesland,
+              borderWidth: 0.5,
+            };
+            bubbles.push(anode);
+          }
+        });
+
         var bubble_map = new Datamap(
         {
           element: document.getElementById('canvas'),
