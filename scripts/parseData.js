@@ -7,6 +7,7 @@ timeString = '';
 
 national_bubbles = [];
 state_bubbles = [];
+bubbles = [];
 
 d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data)
 {
@@ -242,7 +243,17 @@ return { path: path, projection: projection };
 
 //ISO ID code for city or <state></state>
 setTimeout(() => { 
+  state_bubbles.sort(function (a, b) {
+    if (a.value > b.value) {
+        return -1;
+    }
+    if (b.value > a.value) {
+        return 1;
+    }
+    return 0;
+  });
   bubbles = national_bubbles.concat(state_bubbles);
+
 // only start drawing bubbles on the map when map has rendered completely.
 // bubble_map.labels({'customLabelText': custom_text});
 bubble_map.bubbles(bubbles, {
