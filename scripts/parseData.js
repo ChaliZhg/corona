@@ -71,8 +71,8 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           national_bubbles.push(anode);
         }
         var myString = data[i].Bundesland;
-        custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
-
+        // custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
+        custom_text[myString] = "["+infected_number + "]";
       }
     }
   };
@@ -191,5 +191,5 @@ bubble_map.bubbles(bubbles, {
     return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
   }
 });
-bubble_map.labels({'customLabelText': custom_text, "fontSize": 15});
+bubble_map.labels({'customLabelText': custom_text, "fontSize": 25});
 }, 1500);
