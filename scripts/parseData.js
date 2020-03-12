@@ -192,4 +192,4 @@ bubble_map.bubbles(bubbles, {
   }
 });
 bubble_map.labels({'customLabelText': custom_text, "fontSize": 15});
-}, 1000);
+}, 1500);
