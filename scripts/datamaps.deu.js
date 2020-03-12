@@ -438,7 +438,7 @@
           .attr("x", x)
           .attr("y", y)
           .style("font-size", (options.fontSize || 10) + 'px')
-          .style("font-family", options.fontFamily || "Helvetica")
+          .style("font-family",  "'Source Sans Pro', Arial, Helvetica, sans-serif")
           .style("text-align", 'left')
           .style("fill", options.labelColor || "#000")
               .text(function() {
