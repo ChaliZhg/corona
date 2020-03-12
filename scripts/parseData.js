@@ -190,7 +190,7 @@ setTimeout(() => {
 
   // only start drawing bubbles on the map when map has rendered completely.
   // bubble_map.labels({'customLabelText': custom_text});
-  bubble_map.bubbles(bubbles, {
+  bubble_map.bubbles(national_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
@@ -203,14 +203,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   checkbox.addEventListener('change', function () {
     if (checkbox.checked) {
-  bubble_map.bubbles(national_bubbles, {
+  bubble_map.bubbles(state_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
   });
       console.log('Checked');
     } else {
-  bubble_map.bubbles(state_bubbles, {
+  bubble_map.bubbles(national_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
