@@ -76,174 +76,174 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
 
 });
 
-        //read in sachsen data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-
-        //read in sachsen anhalt data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen-anhalt.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-
-        //read in hessen data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/hessen.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-
-        //read in bayern data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/bayern.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-
-        //read in baden-wuerttemberg data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/baden-wuerttemberg.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-
-        //read in niedersachsen data
-        d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/niedersachsen.csv", function(data)
-        {
-          for (var i = data.length - 1; i >= 0; i--)
-          {
-            anode =
-            {
-              latitude: data[i].Latitude,
-              longitude: data[i].Longitude,
-              fillKey: "subhigh",
-              radius: Math.sqrt(data[i].Fälle)*scale,
-              value: data[i].Fälle,
-              centered: data[i].Bundesland,
-              borderWidth: 0.5,
-            };
-            bubbles.push(anode);
-          }
-        });
-        var bubble_map = new Datamap(
-        {
-          element: document.getElementById('canvas'),
-          scope: 'deu',
-          responsive: true,
-          geographyConfig:
-          {
-            popupOnHover: true,
-            highlightOnHover: false,
-            borderColor: '#444',
-            borderWidth: 0.5,
-          },
-          fills:
-          {
-            defaultFill: "#dddddd",
-            high: '#EB3550',
-            middle: '#6FE88E',
-            low: '#4D4D4D',
-            subhigh: '#EBA19E',
-          },
-          bubblesConfig:
-          {
-            fillOpacity:0.75,
-            borderWidth: 0,
-            borderOpacity: 1, 
-            borderColor: '#FFFFFF',
-            popupOnHover: true,
-            radius: null,
-            popupTemplate: function(geography, data)
-            {
-              return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
-            },
-          },
-    // data: {
-    // 'Sachsen': { fillKey: 'defautlFill' },
-    // },
-    setProjection: function (element)
+//read in sachsen data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
     {
-      var projection = d3.geo.mercator()
-              .center([16.5, 52]) // always in [East Latitude, North Longitude]
-              .scale(2600);
-              // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-              var path = d3.geo.path().projection(projection);
-              return { path: path, projection: projection };
-            }
-          });
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
 
-    //ISO ID code for city or <state></state>
-    setTimeout(() => { 
-        // only start drawing bubbles on the map when map has rendered completely.
-        // bubble_map.labels({'customLabelText': custom_text});
-        bubble_map.bubbles(bubbles, {
-          popupTemplate: function (geo, data) {
-            return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-          }
-        });
-        bubble_map.labels({'customLabelText': custom_text, "fontSize": 15});
-      }, 1000);
+//read in sachsen anhalt data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen-anhalt.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
+    {
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
+
+//read in hessen data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/hessen.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
+    {
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
+
+//read in bayern data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/bayern.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
+    {
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
+
+//read in baden-wuerttemberg data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/baden-wuerttemberg.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
+    {
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
+
+//read in niedersachsen data
+d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/niedersachsen.csv", function(data)
+{
+  for (var i = data.length - 1; i >= 0; i--)
+  {
+    anode =
+    {
+      latitude: data[i].Latitude,
+      longitude: data[i].Longitude,
+      fillKey: "subhigh",
+      radius: Math.sqrt(data[i].Fälle)*scale,
+      value: data[i].Fälle,
+      centered: data[i].Bundesland,
+      borderWidth: 0.5,
+    };
+    bubbles.push(anode);
+  }
+});
+var bubble_map = new Datamap(
+{
+  element: document.getElementById('canvas'),
+  scope: 'deu',
+  responsive: true,
+  geographyConfig:
+  {
+    popupOnHover: true,
+    highlightOnHover: false,
+    borderColor: '#444',
+    borderWidth: 0.5,
+  },
+  fills:
+  {
+    defaultFill: "#dddddd",
+    high: '#EB3550',
+    middle: '#6FE88E',
+    low: '#4D4D4D',
+    subhigh: '#EBA19E',
+  },
+  bubblesConfig:
+  {
+    fillOpacity:0.75,
+    borderWidth: 0,
+    borderOpacity: 1, 
+    borderColor: '#FFFFFF',
+    popupOnHover: true,
+    radius: null,
+    popupTemplate: function(geography, data)
+    {
+      return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+    },
+  },
+// data: {
+// 'Sachsen': { fillKey: 'defautlFill' },
+// },
+setProjection: function (element)
+{
+  var projection = d3.geo.mercator()
+.center([16.5, 52]) // always in [East Latitude, North Longitude]
+.scale(2600);
+// .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+var path = d3.geo.path().projection(projection);
+return { path: path, projection: projection };
+}
+});
+
+//ISO ID code for city or <state></state>
+setTimeout(() => { 
+// only start drawing bubbles on the map when map has rendered completely.
+// bubble_map.labels({'customLabelText': custom_text});
+bubble_map.bubbles(bubbles, {
+  popupTemplate: function (geo, data) {
+    return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+  }
+});
+bubble_map.labels({'customLabelText': custom_text, "fontSize": 15});
+}, 1000);
