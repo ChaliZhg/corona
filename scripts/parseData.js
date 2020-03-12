@@ -154,7 +154,7 @@ var bubble_map = new Datamap(
 setProjection: function (element)
 {
   var projection = d3.geo.mercator()
-.center([16.5, 52]) // always in [East Latitude, North Longitude]
+.center([16.0, 52]) // always in [East Latitude, North Longitude]
 .scale(2600);
 // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
 var path = d3.geo.path().projection(projection);
