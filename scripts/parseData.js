@@ -9,6 +9,7 @@ national_bubbles = [];
 state_bubbles = [];
 bubbles = [];
 
+//parse zeit's national data
 d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", function(data)
 {
   for (var i = data.length - 1; i >= 0; i--) {
@@ -43,7 +44,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           fillKey: "high",
           radius: Math.sqrt(infected_number)*scale,
           value:infected_number,
-          type: "0",
+          type: "2",
         };
         national_bubbles.push(anode);
 
@@ -54,7 +55,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             fillKey: "low",
             radius: Math.sqrt(data[i].Todesfälle)*scale,
             value:data[i].Todesfälle,
-            type: "2",
+            type: "0",
           };
           national_bubbles.push(anode);
         }
@@ -82,138 +83,37 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
 
 });
 
-//read in sachsen data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
+states = ['sachsen',
+          'sachsen-anhalt',
+          'hessen',
+          'bayern',
+          'baden-wuerttemberg',
+          'niedersachsen',
+          'nordrhein-westfalen'
+          ];
 
-//read in sachsen anhalt data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/sachsen-anhalt.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
+for (var i = states.length - 1; i >= 0; i--) {
+  url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[i]+".csv";
+  d3.csv(url, function(data)
   {
-    anode =
+    for (var i = data.length - 1; i >= 0; i--)
     {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
+      anode =
+      {
+        latitude: data[i].Latitude,
+        longitude: data[i].Longitude,
+        fillKey: "subhigh",
+        radius: Math.sqrt(data[i].Fälle)*scale,
+        value: data[i].Fälle,
+        centered: data[i].Bundesland,
+        borderWidth: 0.5,
+        type: -3,
+      };
+      state_bubbles.push(anode);
+    }
+  });
+}
 
-//read in hessen data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/hessen.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
-
-//read in bayern data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/bayern.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
-
-//read in baden-wuerttemberg data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/baden-wuerttemberg.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
-
-//read in niedersachsen data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/niedersachsen.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
-
-//read in nordrhein-westfalen data
-d3.csv("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/nordrhein-westfalen.csv", function(data)
-{
-  for (var i = data.length - 1; i >= 0; i--)
-  {
-    anode =
-    {
-      latitude: data[i].Latitude,
-      longitude: data[i].Longitude,
-      fillKey: "subhigh",
-      radius: Math.sqrt(data[i].Fälle)*scale,
-      value: data[i].Fälle,
-      centered: data[i].Bundesland,
-      borderWidth: 0.5,
-    };
-    state_bubbles.push(anode);
-  }
-});
 
 var bubble_map = new Datamap(
 {
@@ -266,25 +166,23 @@ return { path: path, projection: projection };
 
 //ISO ID code for city or <state></state>
 setTimeout(() => {
-  national_bubbles.sort(function (a, b) {
+  bubbles = national_bubbles.concat(state_bubbles);
+  bubbles.sort(function (a, b) {
     if (a.type > b.type) {
-        return 1;
+        return -1;
     }
     if (b.type > a.type) {
-        return -1;
-    }
-    return 0;
-  });
-  state_bubbles.sort(function (a, b) {
-    if (a.value > b.value) {
-        return -1;
-    }
-    if (b.value > a.value) {
         return 1;
     }
+    if (a.value > b.value) {
+        return 1;
+    }
+    if (b.value > a.value) {
+        return -1;
+    }
     return 0;
   });
-  bubbles = national_bubbles.concat(state_bubbles);
+
 
 // only start drawing bubbles on the map when map has rendered completely.
 // bubble_map.labels({'customLabelText': custom_text});
