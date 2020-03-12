@@ -42,7 +42,8 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
           centered: data[i].Bundesland,
           fillKey: "high",
           radius: Math.sqrt(infected_number)*scale,
-          value:infected_number
+          value:infected_number,
+          type: "0",
         };
         national_bubbles.push(anode);
 
@@ -52,7 +53,8 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             centered: data[i].Bundesland,
             fillKey: "low",
             radius: Math.sqrt(data[i].Todesfälle)*scale,
-            value:data[i].Todesfälle
+            value:data[i].Todesfälle,
+            type: "2",
           };
           national_bubbles.push(anode);
         }
@@ -62,7 +64,8 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
             centered: data[i].Bundesland,
             fillKey: "middle",
             radius: Math.sqrt(data[i].Genesene)*scale,
-            value:data[i].Genesene
+            value:data[i].Genesene,
+            type: "1",
           };
           national_bubbles.push(anode);
         }
@@ -242,7 +245,16 @@ return { path: path, projection: projection };
 
 
 //ISO ID code for city or <state></state>
-setTimeout(() => { 
+setTimeout(() => {
+  national_bubbles.sort(function (a, b) {
+    if (a.type > b.type) {
+        return 1;
+    }
+    if (b.type > a.type) {
+        return -1;
+    }
+    return 0;
+  });
   state_bubbles.sort(function (a, b) {
     if (a.value > b.value) {
         return -1;
