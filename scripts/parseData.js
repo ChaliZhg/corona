@@ -72,7 +72,7 @@ d3.csv("https://interactive.zeit.de/cronjobs/2020/corona/bundeslaender.csv", fun
         }
         var myString = data[i].Bundesland;
         // custom_text[myString] = data[i].Bundesland+" ("+infected_number + ")";
-        custom_text[myString] = "["+infected_number + "]";
+        custom_text[myString] = infected_number;
       }
     }
   };
