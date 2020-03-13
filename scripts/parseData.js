@@ -208,7 +208,7 @@ setTimeout(() => {
 
   state_bubbles.sort(function (a, b) {
     if (a.value > b.value) {
-      console.log([a.value, b.value])
+      // console.log([a.value, b.value])
         return -1;
     }
     if (b.value > a.value) {
