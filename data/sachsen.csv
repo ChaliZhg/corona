@@ -1,14 +1,14 @@
 Bundesland,Fälle,Genesene,Todesfälle,Latitude,Longitude
-Dresden,6,,,51.03,13.7
-Chemnitz,6,,,50.82,12.92
-Stadt-Leipzig,6,,,51.34,12.37
+Dresden,11,,,51.03,13.7
+Chemnitz,3,,,50.82,12.92
+Stadt-Leipzig,16,,,51.34,12.37
 Bautzen,12,,,51.18,14.43
-Erzgebirgskreis,1,,,50.55,12.83
-Görlitz,5,,,51.16,14.99
-Landkreis-Leipzig,8,,,51.21,12.47
-Meißen,3,,,51.16,13.47
-Mittelsachsen,,,,50.97,13.12
-Nordsachsen,,,,51.53,12.75
-Sächsische-Schweiz-Osterzgebirge,6,,,50.9,13.87
-Vogtlandkreis,,,,50.49,12.27
+Erzgebirgskreis,2,,,50.55,12.83
+Görlitz,6,,,51.16,14.99
+Landkreis-Leipzig,11,,,51.21,12.47
+Meißen,5,,,51.16,13.47
+Mittelsachsen, ,,,50.97,13.12
+Nordsachsen,2,,,51.53,12.75
+Sächsische-Schweiz-Osterzgebirge,8,,,50.9,13.87
+Vogtlandkreis, ,,,50.49,12.27
 Zwickau,1,,,50.75,12.5
