@@ -201,7 +201,7 @@ setTimeout(() => {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
   });
-  bubble_map.labels({'customLabelText': custom_text, "fontSize": 25});
+  bubble_map.labels({'customLabelText': custom_text, "fontSize": 40});
 }, 1500);
 
 document.addEventListener('DOMContentLoaded', function () {
