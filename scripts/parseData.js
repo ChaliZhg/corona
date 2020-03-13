@@ -96,7 +96,9 @@ states = ['sachsen',
           'saarland',
           'thuringia',
           'rheinlandpfalz',
-          'brandenburg'
+          'brandenburg',
+          'schleswig-holstein',
+          'mecklenburg-vorpommern'
           ];
 
 for (var i = states.length - 1; i >= 0; i--) {
