@@ -104,7 +104,7 @@ for (var i = states.length - 1; i >= 0; i--) {
   {
     for (var i = data.length - 1; i >= 0; i--)
     {
-      if (latitude: data[i].Latitude!="")
+      if (data[i].Latitude!="")
       {
         anode =
         {
