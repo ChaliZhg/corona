@@ -235,14 +235,12 @@ document.addEventListener('DOMContentLoaded', function () {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
   });
-      console.log('Checked');
     } else {
   bubble_map.bubbles(state_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
   });
-      console.log('Not checked');
     }
   });
 });
