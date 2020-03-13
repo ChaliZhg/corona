@@ -101,8 +101,8 @@ states = ['sachsen',
           'mecklenburg-vorpommern'
           ];
 
-for (var i = states.length - 1; i >= 0; i--) {
-  url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[i]+".csv";
+for (var j = states.length - 1; j >= 0; j--) {
+  url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[j]+".csv";
   d3.csv(url, function(data)
   {
     for (var i = data.length - 1; i >= 0; i--)
@@ -119,6 +119,7 @@ for (var i = states.length - 1; i >= 0; i--) {
           centered: data[i].Bundesland,
           borderWidth: 0.5,
           type: -3,
+          city: states[j],
         };
         state_bubbles.push(anode);
       }
