@@ -1,7 +1,7 @@
 total = 0;
 death = 0;
 recovery = 0;
-scale = 3;
+scale = 2;
 custom_text = {};
 timeString = '';
 
@@ -158,7 +158,7 @@ var bubble_map = new Datamap(
   fills:
   {
     defaultFill: "#dddddd",
-    high: '#EB3550',
+    high: '#EB3550', //EB3550
     middle: '#6FE88E',
     low: '#4D4D4D',
     subhigh: '#EB3550', //EBA19E
