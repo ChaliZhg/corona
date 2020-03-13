@@ -104,18 +104,36 @@ for (var i = states.length - 1; i >= 0; i--) {
   {
     for (var i = data.length - 1; i >= 0; i--)
     {
-      anode =
+      if (latitude: data[i].Latitude!="")
       {
-        latitude: data[i].Latitude,
-        longitude: data[i].Longitude,
-        fillKey: "subhigh",
-        radius: Math.sqrt(data[i].Fälle)*scale,
-        value: data[i].Fälle,
-        centered: data[i].Bundesland,
-        borderWidth: 0.5,
-        type: -3,
-      };
-      state_bubbles.push(anode);
+        anode =
+        {
+          latitude: data[i].Latitude,
+          longitude: data[i].Longitude,
+          fillKey: "subhigh",
+          radius: Math.sqrt(data[i].Fälle)*scale,
+          value: data[i].Fälle,
+          centered: data[i].Bundesland,
+          borderWidth: 0.5,
+          type: -3,
+        };
+        state_bubbles.push(anode);
+      }
+      else
+      {
+        anode =
+        {
+          centered: data[i].Bundesland,
+          fillKey: "subhigh",
+          radius: Math.sqrt(data[i].Fälle)*scale,
+          value: data[i].Fälle,
+          centered: data[i].Bundesland,
+          borderWidth: 0.5,
+          type: -3,
+        };
+        state_bubbles.push(anode);
+      }
+
     }
   });
 }
