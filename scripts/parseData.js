@@ -107,6 +107,7 @@ for (var j = states.length - 1; j >= 0; j--) {
   {
     for (var i = data.length - 1; i >= 0; i--)
     {
+      temp_value = parseInt(data[i].Fälle);
       if (data[i].Latitude!="")
       {
         anode =
@@ -114,8 +115,8 @@ for (var j = states.length - 1; j >= 0; j--) {
           latitude: data[i].Latitude,
           longitude: data[i].Longitude,
           fillKey: "subhigh",
-          radius: Math.sqrt(data[i].Fälle)*scale,
-          value: data[i].Fälle,
+          radius: Math.sqrt(temp_value)*scale,
+          value: temp_value,
           centered: data[i].Bundesland,
           borderWidth: 0.5,
           type: -3,
@@ -129,8 +130,8 @@ for (var j = states.length - 1; j >= 0; j--) {
         {
           centered: data[i].Bundesland,
           fillKey: "subhigh",
-          radius: Math.sqrt(data[i].Fälle)*scale,
-          value: data[i].Fälle,
+          radius: Math.sqrt(temp_value)*scale,
+          value: temp_value,
           centered: data[i].Bundesland,
           borderWidth: 0.5,
           type: -3,
@@ -207,6 +208,7 @@ setTimeout(() => {
 
   state_bubbles.sort(function (a, b) {
     if (a.value > b.value) {
+      console.log([a.value, b.value])
         return -1;
     }
     if (b.value > a.value) {
