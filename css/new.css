@@ -43,5 +43,5 @@ body{padding:0; text-align: center; margin:30px 0;line-height:1.8em;font-size:16
 
 .checkbox-container.green .active-circle,
 .checkbox-container.green input:checked + label {
-  background-color: #28A6FF;
+  background-color: #dddddd;
 }

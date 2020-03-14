@@ -157,11 +157,11 @@ var bubble_map = new Datamap(
   },
   fills:
   {
-    defaultFill: "#dddddd",
-    high: '#EB3550', //EB3550
+    defaultFill: "#f4f4eb",
+    high: 'rgb(166, 189, 219)', //EB3550
     middle: '#6FE88E',
     low: '#4D4D4D',
-    subhigh: '#EB3550', //EBA19E
+    subhigh: 'rgb(166, 189, 219)', //EBA19E
   },
   bubblesConfig:
   {
