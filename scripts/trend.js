@@ -111,7 +111,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 90)
     .attr('y', 65)
-    .text('Hesse');
+    .text('Hessen');
   // legend.append('path')
   //   .attr('class', 'median-line')
   //   .attr('d', 'M10,80L85,80');

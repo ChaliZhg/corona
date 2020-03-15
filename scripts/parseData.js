@@ -107,7 +107,7 @@ function setup(argument)
     }
   document.getElementById('time').innerHTML = data.changeTimestamp;
   document.getElementById('total_number').innerHTML = data.totals.count;
-  document.getElementById('death_number').innerHTML = '0'+data.totals.dead;
+  document.getElementById('death_number').innerHTML = data.totals.dead;
   document.getElementById('recovery_number').innerHTML = data.totals.recovered;
   }
   states = ['sachsen',
