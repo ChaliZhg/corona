@@ -339,7 +339,7 @@ function addMarker (marker, svg, chartHeight, x) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*0.9)
-    .text(marker.type);
+    .text("Death");
 
   markerG.append('text')
     .attr('x', radius)
@@ -424,7 +424,7 @@ d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59
     };
   });
 
-  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/d30bb0885882e8ff06370b6dfadf9e8e6fb95168/markers.json', function (error, markerData) {
+  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/3ad5db96f73459508e88e249631e72acbd42200c/markers.json', function (error, markerData) {
     if (error) {
       console.error(error);
       return;
@@ -438,6 +438,6 @@ d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59
       };
     });
 
-    makeChart(data, []);
+    makeChart(data, markers);
   });
 });
