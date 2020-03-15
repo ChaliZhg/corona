@@ -1,8 +1,8 @@
 var label = d3.select(".label");
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-  width = 450,
-  height = 270 - margin.top - margin.bottom;
+var margin = {top: 10, right: 10, bottom: 40, left: 50},
+  width = 390,
+  height = 200;
 
 // Parse the date / time
 var parseDate = d3.time.format("%d-%b-%y").parse;
@@ -13,7 +13,7 @@ var y = d3.scale.linear().range([height, 0]);
 
 // Define the axes
 var xAxis = d3.svg.axis().scale(x)
-  .orient("bottom").ticks(5);
+  .orient("bottom").ticks(50,0).tickFormat(d3.time.format("%m/%d"));
 
 var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(5);
@@ -72,8 +72,15 @@ d3.json("https://raw.githubusercontent.com/ChaliZhg/corona/master/data/history.j
   // Add the X Axis
   svg.append("g")     // Add the X Axis
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .attr("transform", "translate(0," + height*2 + ")")
+    .call(xAxis)
+  .selectAll("text")
+    .attr("y", 0)
+    .attr("x", 9)
+    .attr("dy", ".35em")
+    .attr("transform", "rotate(90)")
+    .style("text-anchor", "start")
+    .style("font", "10px Arial")
 
   // Add the Y Axis
   svg.append("g")     // Add the Y Axis
