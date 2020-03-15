@@ -138,8 +138,8 @@ svg {
 
 .marker.client .marker-bg,
 .marker.client path {
-  fill: rgba(255, 127, 0, 0.8);
-  stroke: rgba(255, 127, 0, 0.8);
+  fill: #4D4D4D;
+  stroke: #4D4D4D;
   stroke-width: 3;
 }
 
