@@ -12,7 +12,52 @@ bubbles = [];
 var result;
 
 
-
+  var bubble_map = new Datamap(
+  {
+    element: document.getElementById('canvas'),
+    scope: 'deu',
+    responsive: true,
+    geographyConfig:
+    {
+      popupOnHover: true,
+      highlightOnHover: false,
+      borderColor: '#444',
+      borderWidth: 0.5,
+    },
+    fills:
+    {
+      defaultFill: "#f4f4eb",
+      high: 'rgb(166, 189, 219)', //EB3550
+      middle: '#6FE88E',
+      low: '#4D4D4D',
+      subhigh: 'rgb(166, 189, 219)', //EBA19E
+    },
+    bubblesConfig:
+    {
+      fillOpacity:0.75,
+      borderWidth: 1.5,
+      borderOpacity: 1, 
+      borderColor: '#FFFFFF',
+      popupOnHover: true,
+      radius: null,
+      popupTemplate: function(geography, data)
+      {
+        return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+      },
+    },
+  // data: {
+  // 'Sachsen': { fillKey: 'defautlFill' },
+  // },
+  setProjection: function (element)
+  {
+    var projection = d3.geo.mercator()
+      .center([16.0, 52]) // always in [East Latitude, North Longitude]
+      .scale(2600);
+      // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+      var path = d3.geo.path().projection(projection);
+      return { path: path, projection: projection };
+      }
+      });
 
 function setup(argument)
 {
@@ -126,52 +171,7 @@ function setup(argument)
   }
 
   setTimeout(() => {
-  var bubble_map = new Datamap(
-  {
-    element: document.getElementById('canvas'),
-    scope: 'deu',
-    responsive: true,
-    geographyConfig:
-    {
-      popupOnHover: true,
-      highlightOnHover: false,
-      borderColor: '#444',
-      borderWidth: 0.5,
-    },
-    fills:
-    {
-      defaultFill: "#f4f4eb",
-      high: 'rgb(166, 189, 219)', //EB3550
-      middle: '#6FE88E',
-      low: '#4D4D4D',
-      subhigh: 'rgb(166, 189, 219)', //EBA19E
-    },
-    bubblesConfig:
-    {
-      fillOpacity:0.75,
-      borderWidth: 1.5,
-      borderOpacity: 1, 
-      borderColor: '#FFFFFF',
-      popupOnHover: true,
-      radius: null,
-      popupTemplate: function(geography, data)
-      {
-        return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
-      },
-    },
-  // data: {
-  // 'Sachsen': { fillKey: 'defautlFill' },
-  // },
-  setProjection: function (element)
-  {
-    var projection = d3.geo.mercator()
-      .center([16.0, 52]) // always in [East Latitude, North Longitude]
-      .scale(2600);
-      // .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-      var path = d3.geo.path().projection(projection);
-      return { path: path, projection: projection };
-      }
-      });
+
   national_bubbles.sort(function (a, b) {
     if (a.type > b.type) {
         return -1;
