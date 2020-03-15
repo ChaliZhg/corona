@@ -1,39 +1,43 @@
 Bundesland,Fälle,Genesene,Todesfälle,Latitude,Longitude
 LK Ammerland,7,,,53.25,8.01
-LK Aurich,3,,,53.47,7.48
-LK Celle,6,,,52.62,10.06
-LK Cloppenburg,1,,,52.84,9.05
+LK Aurich,9,,,53.47,7.48
+LK Celle,8,,,52.62,10.06
+LK Cloppenburg,2,,,52.84,9.05
 LK Cuxhaven,5,,,53.86,8.69
 LK Diepholz,19,,,52.61,8.37
-LK Emsland,4,,,52.73,7.46
+LK Emsland,9,,,52.73,7.46
 LK Friesland,2,,,53.49,7.99
-LK Gifhorn,5,,,52.61,10.6
+LK Gifhorn,7,,,52.61,10.6
+Goslar,7,,,50.91,10.43
 LK Göttingen,3,,,51.47,9.94
-LK Grafschaft Bentheim,3,,,52.54,7.02
-LK Hameln-Pyrmont,2,,,52.12,9.37
+LK Grafschaft Bentheim,5,,,52.54,7.02
+LK Hameln-Pyrmont,3,,,52.12,9.37
 LK Harburg,11,,,53.46,9.98
+Heidekreis,1,,,53.07,9.88
+Helmstedt,2,,,52.22,11.01
 LK Hildesheim,10,,,52.15,9.96
-LK Holzminden,1,,,51.82,9.46
+LK Holzminden,2,,,51.82,9.46
 LK Leer,1,,,53.24,7.47
 LK Lüneburg,1,,,53.25,10.41
 LK Nienburg (Weser),2,,,52.64,9.21
 LK Northeim,4,,,51.7,10
 LK Oldenburg,4,,,53.14,8.21
 LK Osnabrück,2,,,52.41,7.98
-LK Osterholz,12,,,53.28,7.83
-LK Rotenburg,5,,,49.38,10.19
+LK Osterholz,13,,,53.28,7.83
+LK Peine,2,,,52.32,10.23
+LK Rotenburg,11,,,49.38,10.19
 LK Schaumburg,2,,,52.3,9.2
-LK Stade,17,,,53.59,9.47
+LK Stade,22,,,53.59,9.47
 LK Uelzen,1,,,52.97,10.56
-LK Vechta,2,,,52.73,8.28
-LK Verden,8,,,52.93,9.23
+LK Vechta,3,,,52.73,8.28
+LK Verden,10,,,52.93,9.23
 LK Wittmund,1,,,53.57,7.77
 Hannover,59,,,52.38,9.73
-Braunschweig,2,,,52.27,10.53
+Braunschweig,5,,,52.27,10.53
 Delmenhorst,5,,,53.05,8.64
 Emden,3,,,53.36,7.21
-Oldenburg,11,,,53.14,8.21
+Oldenburg,15,,,53.14,8.21
 Osnabrück,1,,,53.28,8.05
-Salzgitter,1,,,52.13,10.39
-Wilhelmshaven,2,,,53.53,9.11
-Wolfsburg,2,,,52.49,10.53
+Salzgitter,2,,,52.13,10.39
+Wilhelmshaven,3,,,53.53,9.11
+Wolfsburg,3,,,52.49,10.53
