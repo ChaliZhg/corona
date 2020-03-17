@@ -36,28 +36,28 @@ svg {
 }
 .area.sum0,
 .legend .sum0 {
-  fill: #193680;
-  stroke: #193680;
+  fill: #34AAEB;
+  stroke: #34AAEB;
 }
 .area.sum1,
 .legend .sum1 {
-  fill: #80A4FF;
-  stroke: #80A4FF;
+  fill: #9151EB;
+  stroke: #9151EB;
 }
 .area.sum2,
 .legend .sum2 {
-  fill: #336DFF;
-  stroke: #336DFF;
+  fill: #E88E98;
+  stroke: #E88E98;
 }
 .area.sum3,
 .legend .sum3 {
-  fill: #7AF4FF;
-  stroke: #7AF4FF;
+  fill: #EB366E;
+  stroke: #EB366E;
 }
 .area.sum4,
 .legend .sum4 {
-  fill: #25BECC;
-  stroke: #25BECC;
+  fill: #FFE85E;
+  stroke: #FFE85E;
 }
 .area.sum5,
 .legend .sum5 {
@@ -66,8 +66,8 @@ svg {
 }
 .area.sum6,
 .legend .sum6 {
-  fill: #3DFF7E;
-  stroke: #3DFF7E;
+  fill: #EE51FF;
+  stroke: #EE51FF;
 }
 .area.sum7,
 .legend .sum7 {
