@@ -110,65 +110,65 @@ function setup(argument)
   document.getElementById('death_number').innerHTML = data.totals.dead;
   document.getElementById('recovery_number').innerHTML = data.totals.recovered;
   }
-  states = ['sachsen',
-            'sachsen-anhalt',
-            'hessen',
-            'bayern',
-            'baden-wuerttemberg',
-            'niedersachsen',
-            'nordrhein-westfalen',
-            'bremen',
-            'hamburg',
-            'berlin',
-            'saarland',
-            'thuringia',
-            'rheinlandpfalz',
-            'brandenburg',
-            'schleswig-holstein',
-            'mecklenburg-vorpommern'
-            ];
+  // states = ['sachsen',
+  //           'sachsen-anhalt',
+  //           'hessen',
+  //           'bayern',
+  //           'baden-wuerttemberg',
+  //           'niedersachsen',
+  //           'nordrhein-westfalen',
+  //           'bremen',
+  //           'hamburg',
+  //           'berlin',
+  //           'saarland',
+  //           'thuringia',
+  //           'rheinlandpfalz',
+  //           'brandenburg',
+  //           'schleswig-holstein',
+  //           'mecklenburg-vorpommern'
+  //           ];
 
-  for (var j = states.length - 1; j >= 0; j--)
-  {
-    url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[j]+".csv";
-    d3.csv(url, function(data)
-    {
-      for (var i = data.length - 1; i >= 0; i--)
-      {
-        if (data[i].Latitude!="")
-        {
-          anode =
-          {
-            latitude: data[i].Latitude,
-            longitude: data[i].Longitude,
-            fillKey: "subhigh",
-            radius: Math.sqrt(data[i].Fälle)*scale,
-            value: parseInt(data[i].Fälle),
-            centered: data[i].Bundesland,
-            borderWidth: 0.5,
-            type: -3,
-            city: states[j],
-          };
-          state_bubbles.push(anode);
-        }
-        else
-        {
-          anode =
-          {
-            centered: data[i].Bundesland,
-            fillKey: "subhigh",
-            radius: Math.sqrt(data[i].Fälle)*scale,
-            value: parseInt(data[i].Fälle),
-            centered: data[i].Bundesland,
-            borderWidth: 0.5,
-            type: -3,
-          };
-          state_bubbles.push(anode);
-        }
+  // for (var j = states.length - 1; j >= 0; j--)
+  // {
+  //   url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[j]+".csv";
+  //   d3.csv(url, function(data)
+  //   {
+  //     for (var i = data.length - 1; i >= 0; i--)
+  //     {
+  //       if (data[i].Latitude!="")
+  //       {
+  //         anode =
+  //         {
+  //           latitude: data[i].Latitude,
+  //           longitude: data[i].Longitude,
+  //           fillKey: "subhigh",
+  //           radius: Math.sqrt(data[i].Fälle)*scale,
+  //           value: parseInt(data[i].Fälle),
+  //           centered: data[i].Bundesland,
+  //           borderWidth: 0.5,
+  //           type: -3,
+  //           city: states[j],
+  //         };
+  //         state_bubbles.push(anode);
+  //       }
+  //       else
+  //       {
+  //         anode =
+  //         {
+  //           centered: data[i].Bundesland,
+  //           fillKey: "subhigh",
+  //           radius: Math.sqrt(data[i].Fälle)*scale,
+  //           value: parseInt(data[i].Fälle),
+  //           centered: data[i].Bundesland,
+  //           borderWidth: 0.5,
+  //           type: -3,
+  //         };
+  //         state_bubbles.push(anode);
+  //       }
 
-      }
-    });
-  }
+  //     }
+  //   });
+  // }
 
   setTimeout(() => {
 
@@ -207,22 +207,22 @@ function setup(argument)
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  var checkbox = document.querySelector('input[type="checkbox"]');
+// document.addEventListener('DOMContentLoaded', function () {
+//   var checkbox = document.querySelector('input[type="checkbox"]');
 
-  checkbox.addEventListener('change', function () {
-    if (checkbox.checked) {
-  bubble_map.bubbles(state_bubbles, {
-    popupTemplate: function (geo, data) {
-      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-    }
-  });
-    } else {
-  bubble_map.bubbles(national_bubbles, {
-    popupTemplate: function (geo, data) {
-      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-    }
-  });
-    }
-  });
-});
+//   checkbox.addEventListener('change', function () {
+//     if (checkbox.checked) {
+//   bubble_map.bubbles(state_bubbles, {
+//     popupTemplate: function (geo, data) {
+//       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+//     }
+//   });
+//     } else {
+//   bubble_map.bubbles(national_bubbles, {
+//     popupTemplate: function (geo, data) {
+//       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+//     }
+//   });
+//     }
+//   });
+// });
