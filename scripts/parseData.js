@@ -1,13 +1,21 @@
-total = 0;
-death = 0;
-recovery = 0;
+zeit_infections = 0;
+zeit_deaths = 0;
+zeit_recoveries = 0;
 // scale = 2;
-custom_text = {};
+zeit_custom_text = {};
 timeString = '';
+zeit_time = '';
 
-national_bubbles = [];
+zeit_bubbles = [];
 state_bubbles = [];
 bubbles = [];
+
+morgen_bubbles =[];
+morgen_custom_text = {};
+morgen_infections = 0;
+morgen_deaths = 0;
+morgen_recoveries = 0;
+morgen_time = '';
 
 var result;
 
@@ -27,7 +35,7 @@ var result;
     fills:
     {
       defaultFill: "#f4f4eb",
-      high: 'rgb(166, 189, 219)', //EB3550
+      high: '#d14f69', //EB3550
       middle: '#6FE88E',
       low: '#4D4D4D',
       subhigh: 'rgb(166, 189, 219)', //EBA19E
@@ -62,7 +70,7 @@ var result;
 function setup(argument)
 {
   scale = 1.5;
-  custom_text = {};
+  // zeit_custom_text = {};
   url = "https://interactive.zeit.de/cronjobs/2020/corona/data.json";
   loadJSON(url, gotContent, 'json');
 
@@ -84,7 +92,7 @@ function setup(argument)
           value: count,
           type: "2",
         };
-      national_bubbles.push(count_node);
+      zeit_bubbles.push(count_node);
       recovered_node =
         {
           centered: state,
@@ -93,7 +101,7 @@ function setup(argument)
           value:recovered,
           type: "1",
         };
-      national_bubbles.push(recovered_node);
+      zeit_bubbles.push(recovered_node);
       dead_node =
         {
           centered: state,
@@ -102,77 +110,76 @@ function setup(argument)
           value: dead,
           type: "0",
         };
-      national_bubbles.push(dead_node);
-      custom_text[state] = count;
+      zeit_bubbles.push(dead_node);
+      zeit_custom_text[state] = count;
     }
+    zeit_infections = data.totals.count;
+    zeit_deaths = data.totals.dead;
+    zeit_recoveries = data.totals.recovered;
+    zeit_time = data.changeTimestamp;
   document.getElementById('time').innerHTML = data.changeTimestamp;
   document.getElementById('total_number').innerHTML = data.totals.count;
   document.getElementById('death_number').innerHTML = data.totals.dead;
   document.getElementById('recovery_number').innerHTML = data.totals.recovered;
+  console.log(zeit_bubbles.length);
   }
-  // states = ['sachsen',
-  //           'sachsen-anhalt',
-  //           'hessen',
-  //           'bayern',
-  //           'baden-wuerttemberg',
-  //           'niedersachsen',
-  //           'nordrhein-westfalen',
-  //           'bremen',
-  //           'hamburg',
-  //           'berlin',
-  //           'saarland',
-  //           'thuringia',
-  //           'rheinlandpfalz',
-  //           'brandenburg',
-  //           'schleswig-holstein',
-  //           'mecklenburg-vorpommern'
-  //           ];
 
-  // for (var j = states.length - 1; j >= 0; j--)
-  // {
-  //   url = "https://raw.githubusercontent.com/ChaliZhg/corona/master/data/"+states[j]+".csv";
-  //   d3.csv(url, function(data)
-  //   {
-  //     for (var i = data.length - 1; i >= 0; i--)
-  //     {
-  //       if (data[i].Latitude!="")
-  //       {
-  //         anode =
-  //         {
-  //           latitude: data[i].Latitude,
-  //           longitude: data[i].Longitude,
-  //           fillKey: "subhigh",
-  //           radius: Math.sqrt(data[i].Fälle)*scale,
-  //           value: parseInt(data[i].Fälle),
-  //           centered: data[i].Bundesland,
-  //           borderWidth: 0.5,
-  //           type: -3,
-  //           city: states[j],
-  //         };
-  //         state_bubbles.push(anode);
-  //       }
-  //       else
-  //       {
-  //         anode =
-  //         {
-  //           centered: data[i].Bundesland,
-  //           fillKey: "subhigh",
-  //           radius: Math.sqrt(data[i].Fälle)*scale,
-  //           value: parseInt(data[i].Fälle),
-  //           centered: data[i].Bundesland,
-  //           borderWidth: 0.5,
-  //           type: -3,
-  //         };
-  //         state_bubbles.push(anode);
-  //       }
 
-  //     }
-  //   });
-  // }
+  d3.csv("https://interaktiv.morgenpost.de/corona-virus-karte-infektionen-deutschland-weltweit/data/Coronavirus.current.v2.csv", function(data)   
+  {
+    for (var i = data.length - 1; i >= 0; i--)
+    {
+      if((data[i].parent=="Deutschland") && (data[i].label!="Repatriierte"))
+      {
+        if (data[i].date>morgen_time)
+        {
+          morgen_time = data[i].date;
+        }
+        state = data[i].label;
+        count = (data[i].confirmed);
+        recovered = (data[i].recovered);
+        dead = (data[i].deaths);
+        morgen_infections += parseInt(count);
+        morgen_recoveries += parseInt(recovered);
+        morgen_deaths += parseInt(dead);
+        count_node =
+          {
+            centered: state,
+            fillKey: "high",
+            radius: Math.sqrt(count)*scale,
+            value: count,
+            type: "2",
+          };
+        morgen_bubbles.push(count_node);
+        recovered_node =
+          {
+            centered: state,
+            fillKey: "middle",
+            radius: Math.sqrt(recovered)*scale,
+            value:recovered,
+            type: "1",
+          };
+        morgen_bubbles.push(recovered_node);
+        dead_node =
+          {
+            centered: state,
+            fillKey: "low",
+            radius: Math.sqrt(dead)*scale,
+            value: dead,
+            type: "0",
+          };
+        morgen_bubbles.push(dead_node);
+        morgen_custom_text[state] = count;
+
+      }
+    }
+  console.log(morgen_bubbles.length);
+  });
+
 
   setTimeout(() => {
 
-  national_bubbles.sort(function (a, b) {
+  zeit_bubbles.sort(function (a, b) {
     if (a.type > b.type) {
         return -1;
     }
@@ -194,35 +201,58 @@ function setup(argument)
   });
 
     // only start drawing bubbles on the map when map has rendered completely.
-    // bubble_map.labels({'customLabelText': custom_text});
-    bubble_map.bubbles(national_bubbles, {
+    // bubble_map.labels({'customLabelText': zeit_custom_text});
+    bubble_map.bubbles(zeit_bubbles, {
       popupTemplate: function (geo, data) {
         return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
       }
     });
-    bubble_map.labels({'customLabelText': custom_text, "fontSize": 40});
+    bubble_map.labels({'customLabelText': zeit_custom_text, "fontSize": 40});
   }, 1000);
 
 
 
 }
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   var checkbox = document.querySelector('input[type="checkbox"]');
+document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('input[type="checkbox"]');
 
-//   checkbox.addEventListener('change', function () {
-//     if (checkbox.checked) {
-//   bubble_map.bubbles(state_bubbles, {
-//     popupTemplate: function (geo, data) {
-//       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-//     }
-//   });
-//     } else {
-//   bubble_map.bubbles(national_bubbles, {
-//     popupTemplate: function (geo, data) {
-//       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
-//     }
-//   });
-//     }
-//   });
-// });
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      removeElementsByClass("labels");
+      bubble_map.labels({'customLabelText': zeit_custom_text, "fontSize": 40});
+      document.getElementById('total_number').innerHTML = zeit_infections;
+      document.getElementById('recovery_number').innerHTML = zeit_recoveries;
+      document.getElementById('death_number').innerHTML = zeit_deaths;
+      document.getElementById('time').innerHTML = zeit_time;
+  bubble_map.bubbles(zeit_bubbles, {
+    popupTemplate: function (geo, data) {
+      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+    }
+  });
+    }
+    else
+    {
+
+      removeElementsByClass("labels");
+      bubble_map.labels({'customLabelText': morgen_custom_text, "fontSize": 40});
+      document.getElementById('total_number').innerHTML = morgen_infections;
+      document.getElementById('recovery_number').innerHTML = morgen_recoveries;
+      document.getElementById('death_number').innerHTML = morgen_deaths;
+      document.getElementById('time').innerHTML = morgen_time;
+  bubble_map.bubbles(morgen_bubbles, {
+    popupTemplate: function (geo, data) {
+      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+    }
+  });
+    }
+  });
+});
+
+
+function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    for (var i = elements.length - 1; i >= 0; i--) {
+      elements[i].innerHTML = "";
+    }
+}
