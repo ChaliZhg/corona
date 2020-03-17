@@ -1,7 +1,7 @@
 total = 0;
 death = 0;
 recovery = 0;
-scale = 2;
+// scale = 2;
 custom_text = {};
 timeString = '';
 
@@ -61,7 +61,7 @@ var result;
 
 function setup(argument)
 {
-  scale = 2;
+  scale = 1.5;
   custom_text = {};
   url = "https://interactive.zeit.de/cronjobs/2020/corona/data.json";
   loadJSON(url, gotContent, 'json');
