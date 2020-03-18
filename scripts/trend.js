@@ -395,7 +395,7 @@ function makeChart (data, markers) {
 }
 
 var parseDate  = d3.time.format('%Y-%m-%d').parse;
-d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59e6df4/raw/2860f2bbcbc15cd548aac21479ec242f3c251bb4/csvjson.json', function (error, rawData) {
+d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59e6df4/raw/f6767a4dc6ddb37bce0636af0fcf79060a7e0739/csvjson.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;
