@@ -121,7 +121,7 @@ function setup(argument)
   document.getElementById('total_number').innerHTML = data.totals.count;
   document.getElementById('death_number').innerHTML = data.totals.dead;
   document.getElementById('recovery_number').innerHTML = data.totals.recovered;
-  console.log(zeit_bubbles.length);
+  // console.log(zeit_bubbles.length);
   }
 
 
@@ -173,7 +173,7 @@ function setup(argument)
 
       }
     }
-  console.log(morgen_bubbles.length);
+  // console.log(morgen_bubbles.length);
   });
 
 
