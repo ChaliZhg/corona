@@ -1,7 +1,7 @@
  
 function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   var legendWidth  = 250,
-      legendHeight = 75;
+      legendHeight = 100;
 
   // clipping to make sure nothing appears behind legend
   svg.append('clipPath')
@@ -112,6 +112,42 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
     .attr('x', 90)
     .attr('y', 65)
     .text('Hessen');
+
+  legend.append('rect')
+    .attr('class', 'sum6')
+    .attr('width',  75)
+    .attr('height', 5)
+    .attr('x', 10)
+    .attr('y', 70);
+
+  legend.append('text')
+    .attr('x', 90)
+    .attr('y', 75)
+    .text('Hamburg');
+
+  legend.append('rect')
+    .attr('class', 'sum7')
+    .attr('width',  75)
+    .attr('height', 5)
+    .attr('x', 10)
+    .attr('y', 80);
+
+  legend.append('text')
+    .attr('x', 90)
+    .attr('y', 85)
+    .text('Rhineland-Palatinate');
+
+  legend.append('rect')
+    .attr('class', 'sum8')
+    .attr('width',  75)
+    .attr('height', 5)
+    .attr('x', 10)
+    .attr('y', 90);
+
+  legend.append('text')
+    .attr('x', 90)
+    .attr('y', 95)
+    .text('Saxony');
   // legend.append('path')
   //   .attr('class', 'median-line')
   //   .attr('d', 'M10,80L85,80');
