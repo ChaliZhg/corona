@@ -69,7 +69,7 @@ var result;
 
 function setup(argument)
 {
-  scale = 1.5;
+  scale = 1.0;
   // zeit_custom_text = {};
   url = "https://interactive.zeit.de/cronjobs/2020/corona/data.json";
   loadJSON(url, gotContent, 'json');
