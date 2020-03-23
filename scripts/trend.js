@@ -431,7 +431,7 @@ function makeChart (data, markers) {
 }
 
 var parseDate  = d3.time.format('%Y-%m-%d').parse;
-d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59e6df4/raw/781df0739508b12dc62f9cbd01574fc9dce3ef27/csvjson.json', function (error, rawData) {
+d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59e6df4/raw/be186ea31a8566a4affcb95106245c63d4e68174/csvjson.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;
@@ -460,7 +460,7 @@ d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59
     };
   });
 
-  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/80289dc87df16eeaa7d7c4b2d02eb1b660e2d7d1/markers.json', function (error, markerData) {
+  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/3b0672e7236c421311f6ba140c42ffdf284c1657/markers.json', function (error, markerData) {
     if (error) {
       console.error(error);
       return;
