@@ -136,12 +136,24 @@ function setup(argument)
           morgen_time = data[i].date;
         }
         state = data[i].label;
-        count = (data[i].confirmed);
-        recovered = (data[i].recovered);
-        dead = (data[i].deaths);
-        morgen_infections += parseInt(count);
-        morgen_recoveries += parseInt(recovered);
-        morgen_deaths += parseInt(dead);
+        count = parseInt(data[i].confirmed);
+        recovered = parseInt(data[i].recovered);
+        dead = parseInt(data[i].deaths);
+        if (isNaN(count))
+        {
+          count = 0;
+        }
+        if (isNaN(recovered))
+        {
+          recovered = 0;
+        }
+        if (isNaN(dead))
+        {
+          dead = 0;
+        }
+        morgen_infections += (count);
+        morgen_recoveries += (recovered);
+        morgen_deaths += (dead);
         count_node =
           {
             centered: state,
