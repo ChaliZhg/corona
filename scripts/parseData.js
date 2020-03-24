@@ -286,6 +286,9 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       removeElementsByClass("labels");
       bubble_map.labels({'customLabelText': yesterday_custom_text, "fontSize": 40});
+      document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toString();
+      document.getElementById('recovery_increase').innerHTML = "+"+(today_recoveries - yesterday_recoveries).toString();
+      document.getElementById('death_increase').innerHTML = "+"+(today_deaths - yesterday_deaths).toString();
       // document.getElementById('total_number').innerHTML = yesterday_infections;
       // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
       // document.getElementById('death_number').innerHTML = yesterday_deaths;
