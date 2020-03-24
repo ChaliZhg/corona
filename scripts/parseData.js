@@ -117,10 +117,10 @@ function setup(argument)
     zeit_deaths = data.totals.dead;
     zeit_recoveries = data.totals.recovered;
     zeit_time = data.changeTimestamp;
-  document.getElementById('time').innerHTML = data.changeTimestamp;
-  document.getElementById('total_number').innerHTML = data.totals.count;
-  document.getElementById('death_number').innerHTML = data.totals.dead;
-  document.getElementById('recovery_number').innerHTML = data.totals.recovered;
+  // document.getElementById('time').innerHTML = data.changeTimestamp;
+  // document.getElementById('total_number').innerHTML = data.totals.count;
+  // document.getElementById('death_number').innerHTML = data.totals.dead;
+  // document.getElementById('recovery_number').innerHTML = data.totals.recovered;
   // console.log(zeit_bubbles.length);
   }
 
@@ -187,6 +187,10 @@ function setup(argument)
 
       }
     }
+  document.getElementById('time').innerHTML = morgen_time;
+  document.getElementById('total_number').innerHTML = morgen_infections;
+  document.getElementById('death_number').innerHTML = morgen_deaths;
+  document.getElementById('recovery_number').innerHTML = morgen_recoveries;
   // console.log(morgen_bubbles.length);
   });
 
@@ -216,7 +220,7 @@ function setup(argument)
 
     // only start drawing bubbles on the map when map has rendered completely.
     // bubble_map.labels({'customLabelText': zeit_custom_text});
-    bubble_map.bubbles(zeit_bubbles, {
+    bubble_map.bubbles(morgen_bubbles, {
       popupTemplate: function (geo, data) {
         return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
       }
@@ -234,12 +238,12 @@ document.addEventListener('DOMContentLoaded', function () {
   checkbox.addEventListener('change', function () {
     if (checkbox.checked) {
       removeElementsByClass("labels");
-      bubble_map.labels({'customLabelText': zeit_custom_text, "fontSize": 40});
-      document.getElementById('total_number').innerHTML = zeit_infections;
-      document.getElementById('recovery_number').innerHTML = zeit_recoveries;
-      document.getElementById('death_number').innerHTML = zeit_deaths;
-      document.getElementById('time').innerHTML = zeit_time;
-  bubble_map.bubbles(zeit_bubbles, {
+      bubble_map.labels({'customLabelText': morgen_custom_text, "fontSize": 40});
+      document.getElementById('total_number').innerHTML = morgen_infections;
+      document.getElementById('recovery_number').innerHTML = morgen_recoveries;
+      document.getElementById('death_number').innerHTML = morgen_deaths;
+      document.getElementById('time').innerHTML = morgen_time;
+  bubble_map.bubbles(morgen_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
@@ -247,14 +251,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     else
     {
-
       removeElementsByClass("labels");
-      bubble_map.labels({'customLabelText': morgen_custom_text, "fontSize": 40});
-      document.getElementById('total_number').innerHTML = morgen_infections;
-      document.getElementById('recovery_number').innerHTML = morgen_recoveries;
-      document.getElementById('death_number').innerHTML = morgen_deaths;
-      document.getElementById('time').innerHTML = morgen_time;
-  bubble_map.bubbles(morgen_bubbles, {
+      bubble_map.labels({'customLabelText': zeit_custom_text, "fontSize": 40});
+      document.getElementById('total_number').innerHTML = zeit_infections;
+      document.getElementById('recovery_number').innerHTML = zeit_recoveries;
+      document.getElementById('death_number').innerHTML = zeit_deaths;
+      document.getElementById('time').innerHTML = zeit_time;
+  bubble_map.bubbles(zeit_bubbles, {
     popupTemplate: function (geo, data) {
       return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
     }
