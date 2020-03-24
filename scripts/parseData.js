@@ -139,6 +139,8 @@ function setup(argument)
         count = parseInt(data[i].confirmed);
         recovered = parseInt(data[i].recovered);
         dead = parseInt(data[i].deaths);
+        if (state=="nicht zugeordnet")
+          continue;
         if (isNaN(count))
         {
           count = 0;
