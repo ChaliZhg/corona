@@ -35,9 +35,11 @@
       <script src="scripts/datamaps.deu.js"></script>
       <script src="scripts/p5.min.js"></script>
       <!-- <h1 id='message'>Realtime confirmed COVID-19 infections in Germany</h1> -->
-      <h1><span id ='total_number' style="background: #d14f69; color: white;">Refresh</span><span> infections, </span><br><span id ='recovery_number' style="background: #70c66b; color: white;">to</span><span> recoveries and </span><br><span id ='death_number' style="background: #4D4D4D; color: white;">load data</span><span> deaths in Germany</span></h1>
+      <h1 style="text-align: left;"><span id ='total_number' style="background: #d14f69; color: white;">Refresh</span><span id='infection_increase' style="font-size: small;background: #d14f69; color: white;"> X </span><span> infections</span><br>
+        <span id ='recovery_number' style="background: #70c66b; color: white;">to</span><span id='recovery_increase' style="font-size: small;background: #70c66b; color: white;"> X </span><span> recoveries</span><br>
+        <span id ='death_number' style="background: #4D4D4D; color: white;">load</span><span id='death_increase' style="font-size: small; background: #4D4D4D; color: white;"> X </span><span> deaths</span></h1>
       <!-- <div id='source'>According to realtime data from zeit.de</div> -->
-      <span></span><span id='time'></span>
+      <!-- <span id='time' style="text-align: left;">update time</span> -->
       <!-- <div id='source'>做好防护，积极对待，避免恐慌</div> -->
 <!-- <div class="container" style="text-align: center;">
   <div class="checkbox-container green">
@@ -52,13 +54,13 @@
 <label class="switch-light switch-candy" onclick="">
   <input type="checkbox" checked id="toogle2" checked="=">
 
-  <strong>
+ <!--  <strong>
     Source of data
-  </strong>
+  </strong> -->
 
   <span>
-    <span>MorgenPost</span>
-    <span>Zeit</span>
+    <span id="yesterday_date">Yesterday</span>
+    <span id="today_date">Today</span>
     <a></a>
   </span>
 </label>
