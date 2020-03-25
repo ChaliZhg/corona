@@ -460,7 +460,7 @@ d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59
     };
   });
 
-  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/3b0672e7236c421311f6ba140c42ffdf284c1657/markers.json', function (error, markerData) {
+  d3.json('https://gist.githubusercontent.com/ChaliZhg/cbe5644eb8ac66e5608b46a2f9136583/raw/1bbd1ea6224a0d9c47628f085f88411e56633a2e/markers.json', function (error, markerData) {
     if (error) {
       console.error(error);
       return;
