@@ -287,7 +287,7 @@ function setup(argument)
         return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
       }
     });
-    bubble_map.labels({'customLabelText': yesterday_custom_text, "fontSize": 40});
+    bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
   }, 1000);
 
 
