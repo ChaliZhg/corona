@@ -270,7 +270,14 @@ function setup(argument)
     return 0;
   });
 
-  document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      if (today_infections - yesterday_infections>0)
+      {
+        document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      }
+      else
+      {
+        document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+      }
   document.getElementById('recovery_increase').innerHTML = "+"+(today_recoveries - yesterday_recoveries).toLocaleString();
   document.getElementById('death_increase').innerHTML = "+"+(today_deaths - yesterday_deaths).toLocaleString();
     // only start drawing bubbles on the map when map has rendered completely.
@@ -298,7 +305,14 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
       document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
       // document.getElementById('time').innerHTML = today_time;
-      document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      if (today_infections - yesterday_infections>0)
+      {
+        document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      }
+      else
+      {
+        document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+      }
       document.getElementById('recovery_increase').innerHTML = "+"+(today_recoveries - yesterday_recoveries).toLocaleString();
       document.getElementById('death_increase').innerHTML = "+"+(today_deaths - yesterday_deaths).toLocaleString();
   bubble_map.bubbles(today_bubbles, {
@@ -311,7 +325,15 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       removeElementsByClass("labels");
       bubble_map.labels({'customLabelText': yesterday_custom_text, "fontSize": 40});
-      document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      if (today_infections - yesterday_infections>0)
+      {
+        document.getElementById('infection_increase').innerHTML = "+"+(today_infections - yesterday_infections).toLocaleString();
+      }
+      else
+      {
+        document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+      }
+      
       document.getElementById('recovery_increase').innerHTML = "+"+(today_recoveries - yesterday_recoveries).toLocaleString();
       document.getElementById('death_increase').innerHTML = "+"+(today_deaths - yesterday_deaths).toLocaleString();
       // document.getElementById('total_number').innerHTML = yesterday_infections;
