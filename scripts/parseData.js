@@ -153,7 +153,7 @@ function setup(argument)
     return 0;
   });
 
-  document.getElementById('time').innerHTML = today_time;
+  // document.getElementById('time').innerHTML = today_time;
   document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
   document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
   document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
