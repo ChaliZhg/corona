@@ -212,9 +212,9 @@ function setup(argument)
       }
     }
   // document.getElementById('time').innerHTML = yesterday_time;
-  document.getElementById('total_number').innerHTML = yesterday_infections;
-  document.getElementById('death_number').innerHTML = yesterday_deaths;
-  document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
+  // document.getElementById('total_number').innerHTML = yesterday_infections;
+  // document.getElementById('death_number').innerHTML = yesterday_deaths;
+  // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
 
   // document.getElementById('infection_increase').innerHTML = today_infections - yesterday_infections;
   // document.getElementById('recovery_increase').innerHTML = today_recoveries - yesterday_recoveries;
@@ -224,6 +224,10 @@ function setup(argument)
 
 
   setTimeout(() => {
+
+  document.getElementById('total_number').innerHTML = today_infections;
+  document.getElementById('death_number').innerHTML = today_deaths;
+  document.getElementById('recovery_number').innerHTML = today_recoveries;
 
   today_bubbles.sort(function (a, b) {
     if (a.type > b.type) {
