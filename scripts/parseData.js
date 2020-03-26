@@ -13,7 +13,7 @@ var my_date = 26;
 var my_month = today.getMonth()+1;
 var my_year = today.getFullYear();
 yesterday_url += (my_date-1).toString()+"0"+my_month.toString()+my_year.toString()+".csv";
-document.getElementById('yesterday_date').innerHTML = "Yesterday ("+(my_date-1).toString()+".0"+my_month.toString()+")";
+document.getElementById('yesterday_date').innerHTML = "昨天 ("+(my_date-1).toString()+".0"+my_month.toString()+")";
 state_bubbles = [];
 bubbles = [];
 
@@ -51,7 +51,7 @@ var result;
     },
     bubblesConfig:
     {
-      fillOpacity:0.75,
+      fillOpacity:0.6,
       borderWidth: 1.5,
       borderOpacity: 1, 
       borderColor: '#FFFFFF',
@@ -118,6 +118,7 @@ function setup(argument)
             radius: Math.sqrt(count)*scale,
             value: count,
             type: "2",
+            info: "确诊",
           };
         today_bubbles.push(count_node);
         recovered_node =
@@ -127,6 +128,7 @@ function setup(argument)
             radius: Math.sqrt(recovered)*scale,
             value:recovered,
             type: "1",
+            info: "治愈",
           };
         today_bubbles.push(recovered_node);
         dead_node =
@@ -136,6 +138,7 @@ function setup(argument)
             radius: Math.sqrt(dead)*scale,
             value: dead,
             type: "0",
+            info: "死亡",
           };
         today_bubbles.push(dead_node);
         today_custom_text[state] = count;
@@ -198,6 +201,7 @@ function setup(argument)
             radius: Math.sqrt(count)*scale,
             value: count,
             type: "2",
+            info: "确诊",
           };
         yesterday_bubbles.push(count_node);
         recovered_node =
@@ -207,6 +211,7 @@ function setup(argument)
             radius: Math.sqrt(recovered)*scale,
             value:recovered,
             type: "1",
+            info: "治愈",
           };
         yesterday_bubbles.push(recovered_node);
         dead_node =
@@ -216,6 +221,7 @@ function setup(argument)
             radius: Math.sqrt(dead)*scale,
             value: dead,
             type: "0",
+            info: "死亡",
           };
         yesterday_bubbles.push(dead_node);
         yesterday_custom_text[state] = count;
@@ -284,7 +290,7 @@ function setup(argument)
     // bubble_map.labels({'customLabelText': yesterday_custom_text});
     bubble_map.bubbles(today_bubbles, {
       popupTemplate: function (geo, data) {
-        return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+        return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
       }
     });
     bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
@@ -315,9 +321,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       document.getElementById('recovery_increase').innerHTML = "+"+(today_recoveries - yesterday_recoveries).toLocaleString();
       document.getElementById('death_increase').innerHTML = "+"+(today_deaths - yesterday_deaths).toLocaleString();
+  today_bubbles.sort(function (a, b) {
+    if (a.type > b.type) {
+        return -1;
+    }
+    if (a.value > b.value) {
+        return -1;
+    }
+    return 0;
+  });
   bubble_map.bubbles(today_bubbles, {
     popupTemplate: function (geo, data) {
-      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+      return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
     }
   });
     }
@@ -343,9 +358,18 @@ document.addEventListener('DOMContentLoaded', function () {
       // document.getElementById('infection_increase').innerHTML = "";
       // document.getElementById('recovery_increase').innerHTML = "";
       // document.getElementById('death_increase').innerHTML = "";
+  yesterday_bubbles.sort(function (a, b) {
+    if (a.type > b.type) {
+        return -1;
+    }
+    if (a.value > b.value) {
+        return -1;
+    }
+    return 0;
+  });
   bubble_map.bubbles(yesterday_bubbles, {
     popupTemplate: function (geo, data) {
-      return `<div class="hoverinfo">${data.centered}: ${data.value}</div>`;
+      return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
     }
   });
     }

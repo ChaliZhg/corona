@@ -138,9 +138,10 @@ svg {
 
 .marker.client .marker-bg,
 .marker.client path {
-  fill: #4D4D4D;
+  fill: rgba(51, 51, 51, 0.9);
   stroke: #4D4D4D;
   stroke-width: 3;
+  color: black;
 }
 
 .marker.server .marker-bg,
@@ -156,7 +157,7 @@ svg {
 
 .legend text,
 .marker text {
-  fill: #fff;
+  fill: #000;
   font-weight: bold;
 }
 

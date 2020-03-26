@@ -20,7 +20,13 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   axes.append('g')
     .attr('class', 'x axis')
     .attr('transform', 'translate(0,' + chartHeight + ')')
-    .call(xAxis);
+    .call(xAxis)
+    .append('text')
+      // .attr('transform', 'rotate(-90)')
+      .attr('y', 10)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('日期');
 
   axes.append('g')
     .attr('class', 'y axis')
@@ -30,7 +36,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('Infections');
+      .text('累计确诊');
 
   var legend = svg.append('g')
     .attr('class', 'legend')
@@ -51,34 +57,22 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 90)
     .attr('y', 15)
-    .text('North-Rhine-Westphalia');
+    .text('北威');
 
   legend.append('rect')
     .attr('class', 'sum1')
     .attr('width',  75)
     .attr('height', 5)
     .attr('x', 10)
-    .attr('y', 20);
+    .attr('y', 25);
 
   legend.append('text')
     .attr('x', 90)
-    .attr('y', 25)
-    .text('Bavaria');
+    .attr('y', 30)
+    .text('巴伐利亚');
 
   legend.append('rect')
     .attr('class', 'sum2')
-    .attr('width',  75)
-    .attr('height', 5)
-    .attr('x', 10)
-    .attr('y', 30);
-
-  legend.append('text')
-    .attr('x', 90)
-    .attr('y', 35)
-    .text('Baden-Württemberg');
-
-  legend.append('rect')
-    .attr('class', 'sum3')
     .attr('width',  75)
     .attr('height', 5)
     .attr('x', 10)
@@ -87,34 +81,22 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 90)
     .attr('y', 45)
-    .text('Lower-Saxony');
+    .text('巴登-符腾堡');
+
+  legend.append('rect')
+    .attr('class', 'sum3')
+    .attr('width',  75)
+    .attr('height', 5)
+    .attr('x', 10)
+    .attr('y', 55);
+
+  legend.append('text')
+    .attr('x', 90)
+    .attr('y', 60)
+    .text('下萨克森');
 
   legend.append('rect')
     .attr('class', 'sum4')
-    .attr('width',  75)
-    .attr('height', 5)
-    .attr('x', 10)
-    .attr('y', 50);
-
-  legend.append('text')
-    .attr('x', 90)
-    .attr('y', 55)
-    .text('Berlin');
-
-  legend.append('rect')
-    .attr('class', 'sum5')
-    .attr('width',  75)
-    .attr('height', 5)
-    .attr('x', 10)
-    .attr('y', 60);
-
-  legend.append('text')
-    .attr('x', 90)
-    .attr('y', 65)
-    .text('Hessen');
-
-  legend.append('rect')
-    .attr('class', 'sum6')
     .attr('width',  75)
     .attr('height', 5)
     .attr('x', 10)
@@ -123,31 +105,55 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 90)
     .attr('y', 75)
-    .text('Hamburg');
+    .text('柏林');
 
   legend.append('rect')
-    .attr('class', 'sum7')
+    .attr('class', 'sum5')
     .attr('width',  75)
     .attr('height', 5)
     .attr('x', 10)
-    .attr('y', 80);
+    .attr('y', 85);
 
   legend.append('text')
     .attr('x', 90)
-    .attr('y', 85)
-    .text('Rhineland-Palatinate');
+    .attr('y', 90)
+    .text('黑森');
 
-  legend.append('rect')
-    .attr('class', 'sum8')
-    .attr('width',  75)
-    .attr('height', 5)
-    .attr('x', 10)
-    .attr('y', 90);
+  // legend.append('rect')
+  //   .attr('class', 'sum6')
+  //   .attr('width',  75)
+  //   .attr('height', 5)
+  //   .attr('x', 10)
+  //   .attr('y', 100);
 
-  legend.append('text')
-    .attr('x', 90)
-    .attr('y', 95)
-    .text('Saxony');
+  // legend.append('text')
+  //   .attr('x', 90)
+  //   .attr('y', 105)
+  //   .text('汉堡');
+
+  // legend.append('rect')
+  //   .attr('class', 'sum7')
+  //   .attr('width',  75)
+  //   .attr('height', 5)
+  //   .attr('x', 10)
+  //   .attr('y', 110);
+
+  // legend.append('text')
+  //   .attr('x', 90)
+  //   .attr('y', 115)
+  //   .text('莱茵兰-普法尔茨');
+
+  // legend.append('rect')
+  //   .attr('class', 'sum8')
+  //   .attr('width',  75)
+  //   .attr('height', 5)
+  //   .attr('x', 10)
+  //   .attr('y', 130);
+
+  // legend.append('text')
+  //   .attr('x', 90)
+  //   .attr('y', 145)
+  //   .text('萨克森');
   // legend.append('path')
   //   .attr('class', 'median-line')
   //   .attr('d', 'M10,80L85,80');
@@ -375,7 +381,7 @@ function addMarker (marker, svg, chartHeight, x) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*0.9)
-    .text("Death");
+    .text("死亡");
 
   markerG.append('text')
     .attr('x', radius)
