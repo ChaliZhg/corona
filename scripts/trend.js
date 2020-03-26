@@ -36,7 +36,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('累计确诊');
+      .text('累计确诊 (万人)');
 
   var legend = svg.append('g')
     .attr('class', 'legend')
@@ -386,7 +386,7 @@ function addMarker (marker, svg, chartHeight, x) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(marker.version);
+    .text(marker.version+"例");
 }
 
 function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x) {
@@ -446,23 +446,23 @@ d3.json('https://gist.githubusercontent.com/ChaliZhg/afff054c4e46e1ae1caf62a3e59
   var data = rawData.map(function (d) {
     return {
       date:  parseDate(d.date),
-      sum1: d["North-Rhine-Westphalia"],
-      sum2: d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum3: d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum4: d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum5: d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum6: d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum7: d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum8: d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum9: d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum10: d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum11: d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum12: d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum13: d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum14: d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum15: d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum16: d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
-      sum17: d["Germany-repatriated"]+d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"],
+      sum1: (d["North-Rhine-Westphalia"])/10000,
+      sum2: (d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum3: (d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum4: (d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum5: (d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum6: (d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum7: (d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum8: (d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum9: (d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum10: (d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum11: (d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum12: (d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum13: (d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum14: (d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum15: (d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum16: (d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
+      sum17: (d["Germany-repatriated"]+d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/10000,
     };
   });
 
