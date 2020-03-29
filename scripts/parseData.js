@@ -51,10 +51,10 @@ var result;
     },
     bubblesConfig:
     {
-      fillOpacity:0.6,
-      borderWidth: 1.5,
+      fillOpacity:0.2,
+      borderWidth: 2.0,
       borderOpacity: 1, 
-      borderColor: '#FFFFFF',
+      borderColor: '#d14f69',
       popupOnHover: true,
       radius: null,
       popupTemplate: function(geography, data)
@@ -78,7 +78,7 @@ var result;
 
 function setup(argument)
 {
-  scale = 1.0;
+  scale = 0.5;
 
   d3.csv(today_url, function(data)   
   {
@@ -115,6 +115,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "high",
+            borderColor: '#d14f69',
             radius: Math.sqrt(count)*scale,
             value: count,
             type: "2",
@@ -125,6 +126,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "middle",
+            borderColor: '#6FE88E',
             radius: Math.sqrt(recovered)*scale,
             value:recovered,
             type: "1",
@@ -135,6 +137,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "low",
+            borderColor: '#4D4D4D',
             radius: Math.sqrt(dead)*scale,
             value: dead,
             type: "0",
@@ -198,6 +201,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "high",
+            borderColor: '#d14f69',
             radius: Math.sqrt(count)*scale,
             value: count,
             type: "2",
@@ -208,6 +212,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "middle",
+            borderColor: '#6FE88E',
             radius: Math.sqrt(recovered)*scale,
             value:recovered,
             type: "1",
@@ -218,6 +223,7 @@ function setup(argument)
           {
             centered: state,
             fillKey: "low",
+            borderColor: '#4D4D4D',
             radius: Math.sqrt(dead)*scale,
             value: dead,
             type: "0",
