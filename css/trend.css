@@ -125,16 +125,19 @@ svg {
 .legend .median-line {
   fill: none;
   stroke: #000;
-  stroke-width: 3;
+  stroke-width: 1;
 }
 
 .legend .legend-bg {
   fill: rgba(0, 0, 0, 0.2);
   stroke: rgba(0, 0, 0, 0.5);
+  stroke-width:1;
 }
 
 .legend {
   font-size: 12px;
+  stroke-width:2.5;
+  fill: rgba(0, 0, 0, 0.2);
 }
 
 .marker.client .marker-bg,
@@ -160,10 +163,6 @@ svg {
 .marker text {
   fill: white;
   font-weight: bold;
-}
-.legend {
-  stroke-width:3;
-  fill: rgba(0, 0, 0, 0.2);
 }
 
 .marker text {
