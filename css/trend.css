@@ -162,7 +162,8 @@ svg {
 .legend text,
 .marker text {
   fill: white;
-  font-weight: bold;
+  font-weight: lighter;
+  font-size: small;
 }
 
 .marker text {
