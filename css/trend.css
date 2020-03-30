@@ -126,7 +126,7 @@ svg {
 .legend .median-line {
   fill: none;
   stroke: #CC0E77;
-  stroke-width: 3;
+  stroke-width: 2;
 }
 
 .legend .legend-bg {
