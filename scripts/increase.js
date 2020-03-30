@@ -169,7 +169,7 @@ function drawPaths (svg, data, x, y) {
     .interpolate('basis')
     .x (function (d) { return x(d.date) || 1; })
     .y0(function (d) { return y(d.sum17); })
-    .y1(function (d) { return y(d.sum16); });
+    .y1(function (d) { return y(0); });
   // var sumArea15 = d3.svg.area()
   //   .interpolate('basis')
   //   .x (function (d) { return x(d.date) || 1; })
@@ -237,10 +237,10 @@ function drawPaths (svg, data, x, y) {
   //   .y0(function (d) { return y(d.sum4); })
   //   .y1(function (d) { return y(d.sum3); });
 
-  // var medianLine = d3.svg.line()
-  //   .interpolate('basis')
-  //   .x(function (d) { return x(d.date); })
-  //   .y(function (d) { return y(d.sum3); });
+  var medianLine = d3.svg.line()
+    .interpolate('basis')
+    .x(function (d) { return x(d.date); })
+    .y(function (d) { return y(d.sum17); });
 
   var sumArea2 = d3.svg.area()
     .interpolate('basis')
@@ -344,10 +344,10 @@ function drawPaths (svg, data, x, y) {
   //   .attr('class', 'area sum0')
   //   .attr('d', sumArea0)
   //   .attr('clip-path', 'url(#rect-clip)');
-  // svg.append('path')
-  //   .attr('class', 'median-line')
-  //   .attr('d', medianLine)
-  //   .attr('clip-path', 'url(#rect-clip)');
+  svg.append('path')
+    .attr('class', 'median-line')
+    .attr('d', medianLine)
+    .attr('clip-path', 'url(#rect-clip)');
 }
 
 function addMarker (marker, svg, chartHeight, x) {
@@ -444,39 +444,38 @@ d3.json('https://teaof.life/corona/data/summary.json', function (error, rawData)
   }
 
   tempData = rawData;
-  for (var i = tempData.length - 1; i > 0; i--) {
-    // console.log(tempData[i].date);
-    var keys = Object.keys(tempData[i]);
-    for (var j = keys.length - 1; j >= 0; j--) {
-      if(keys[j]!="Total-infections" && keys[j]!="New-cases" &&keys[j]!="date")
-      {
-        // console.log([i, keys[j], tempData[i][keys[j]]]);
-        tempData[i][keys[j]] = tempData[i][keys[j]]-tempData[i-1][keys[j]];
-      }
+  for (var i = tempData.length - 1; i >= 0; i--) {
+    if (i==0)
+    {
+      tempData[i]["Daily-infection"] = 0
     }
+    else
+    {
+      tempData[i]["Daily-infection"] = tempData[i]["Total-infections"] - tempData[i-1]["Total-infections"];
+    }
+    // console.log(tempData[i].date);
+    // var keys = Object.keys(tempData[i]);
+    // for (var j = keys.length - 1; j >= 0; j--) {
+    //   // if(keys[j]!="Total-infections" && keys[j]!="New-cases" &&keys[j]!="date")
+    //   // {
+    //   //   // console.log([i, keys[j], tempData[i][keys[j]]]);
+    //   //   tempData[i][keys[j]] = tempData[i][keys[j]]-tempData[i-1][keys[j]];
+    //   // }
+    //   // if(keys[j]=="Total-infections")
+    //   // {
+    //   //   tempData[i][keys[j]] = tempData[i][keys[j]]-tempData[i-1][keys[j]];
+    //   // }
+      
+    // }
   }
-  // console.log(tempData);
+  // for (var i = tempData.length - 1; i >= 0; i--) {
+  //   console.log(tempData[i]["Daily-infection"]);
+  // }
 
   var data = tempData.map(function (d) {
     return {
       date:  parseDate(d.date),
-      sum1: (d["North-Rhine-Westphalia"])/1,
-      sum2: (d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum3: (d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum4: (d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum5: (d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum6: (d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum7: (d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum8: (d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum9: (d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum10: (d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum11: (d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum12: (d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum13: (d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum14: (d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum15: (d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum16: (d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
-      sum17: (d["Germany-repatriated"]+d["Saarland"]+d["Saxony-Anhalt"]+d["Mecklenburg-Vorpommern"]+d["Thuringia"]+d["Bremen"]+d["Schleswig-Holstein"]+d["Brandenburg"]+d["Saxony"]+d["Rhineland-Palatinate"]+d["Hamburg"]+d["Hesse"]+d["Berlin"]+d["Lower-Saxony"]+d["Baden-Württemberg"]+d["Bavaria"]+d["North-Rhine-Westphalia"])/1,
+      sum17:d["Daily-infection"],
     };
   });
 

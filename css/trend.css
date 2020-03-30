@@ -117,14 +117,15 @@ svg {
 }
 .area.sum16,
 .legend .sum16 {
-  /*fill: #CC0E77;*/
+  fill: #CC0E77;
   stroke: #CC0E77;
+  opacity: 0.2;
 }
 
 .median-line,
 .legend .median-line {
   fill: none;
-  stroke: #000;
+  stroke: #CC0E77;
   stroke-width: 1;
 }
 
