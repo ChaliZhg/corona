@@ -56,7 +56,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('新增确诊');
+      .text('新增死亡');
 }
 
 function drawPaths (svg, data, x, y) {
@@ -74,12 +74,12 @@ function drawPaths (svg, data, x, y) {
   svg.datum(data);
 
   svg.append('path')
-    .attr('class', 'area confirmed')
+    .attr('class', 'area death')
     .attr('d', sumArea16)
     .attr('clip-path', 'url(#rect-clip)');
 
   svg.append('path')
-    .attr('class', 'confirmed-line')
+    .attr('class', 'death-line')
     .attr('d', medianLine)
     .attr('clip-path', 'url(#rect-clip)');
 }
@@ -152,7 +152,7 @@ function makeChart (data, markers) {
       yAxis = d3.svg.axis().scale(y).orient('left')
                 .innerTickSize(-chartWidth).outerTickSize(0).tickPadding(10);
 
-  var svg = d3.select('#my_dataviz').append('svg')
+  var svg = d3.select('#daily_death_trend').append('svg')
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
     .append('g')
@@ -179,22 +179,22 @@ var parseDate  = d3.time.format('%Y-%m-%d').parse;
     // var keys = Object.keys(tempData[i]);
     if (i== (tempData.length - 1))
     {
-      tempData[i]["confirmed-inc"] = 0;
+      tempData[i]["death-inc"] = 0;
       // console.log([i, tempData[i].date, tempData[i]["confirmed-inc"]]);
     }
     else
     {
       // console.log([i, tempData[i].date, tempData[i]["confirmed"]]);
-      tempData[i]["confirmed-inc"] = tempData[i]["confirmed"] - tempData[i+1]["confirmed"];
+      tempData[i]["death-inc"] = tempData[i]["deaths"] - tempData[i+1]["deaths"];
       // console.log([i, tempData[i].date, tempData[i]["confirmed-inc"]]);
     }
   }
 
   var data = tempData.map(function (d) {
-    // console.log([d.date, d["confirmed-inc"]]);
+    // console.log([d.date, d["death-inc"]]);
     return {
       date:  parseDate(d.date),
-      sum17:d["confirmed-inc"],
+      sum17:d["death-inc"],
     };
   });
 

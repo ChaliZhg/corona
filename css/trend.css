@@ -129,6 +129,48 @@ svg {
   stroke-width: 2;
 }
 
+.area.confirmed,
+.legend .death {
+  fill: #d14f69;
+  stroke: #d14f69;
+  opacity: 0.2;
+}
+
+.confirmed-line,
+.legend .confirmed-line {
+  fill: none;
+  stroke: #d14f69;
+  stroke-width: 2;
+}
+
+.area.recovered,
+.legend .death {
+  fill: #70c66b;
+  stroke: #70c66b;
+  opacity: 0.2;
+}
+
+.recovered-line,
+.legend .recovered-line {
+  fill: none;
+  stroke: #70c66b;
+  stroke-width: 2;
+}
+
+.area.death,
+.legend .death {
+  fill: #4D4D4D;
+  stroke: #4D4D4D;
+  opacity: 0.2;
+}
+
+.death-line,
+.legend .death-line {
+  fill: none;
+  stroke: #4D4D4D;
+  stroke-width: 2;
+}
+
 .legend .legend-bg {
   fill: rgba(0, 0, 0, 0.2);
   stroke: rgba(0, 0, 0, 0.5);
