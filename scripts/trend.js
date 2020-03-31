@@ -437,7 +437,7 @@ function makeChart (data, markers) {
 }
 
 var parseDate  = d3.time.format('%Y-%m-%d').parse;
-d3.json('https://teaof.life/corona/data/summary.json', function (error, rawData) {
+d3.json('/data/summary.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;
@@ -466,7 +466,7 @@ d3.json('https://teaof.life/corona/data/summary.json', function (error, rawData)
     };
   });
 
-  d3.json('https://teaof.life/corona/data/markers.json', function (error, markerData) {
+  d3.json('/data/markers.json', function (error, markerData) {
     if (error) {
       console.error(error);
       return;
