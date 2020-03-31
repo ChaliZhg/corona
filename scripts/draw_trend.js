@@ -73,7 +73,7 @@ function drawPaths (svg, data, x, y, config) {
 
   svg.datum(data);
 
-  console.log(['area '+config["name"], config["name"]+'-line']);
+  // console.log(['area '+config["name"], config["name"]+'-line']);
 
   svg.append('path')
     .attr('class', 'area '+config["name"])
