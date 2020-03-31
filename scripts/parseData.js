@@ -95,7 +95,12 @@ function setup(argument)
         recovered = parseInt(data[i].recovered);
         dead = parseInt(data[i].deaths);
         if (state=="nicht zugeordnet")
+        {
+          today_infections += (count);
+          today_recoveries += (recovered);
+          today_deaths += (dead);
           continue;
+        }
         if (isNaN(count))
         {
           count = 0;
@@ -181,7 +186,12 @@ function setup(argument)
         recovered = parseInt(data[i].recovered);
         dead = parseInt(data[i].deaths);
         if (state=="nicht zugeordnet")
+        {
+          yesterday_infections += (count);
+          yesterday_recoveries += (recovered);
+          yesterday_deaths += (dead);
           continue;
+        }
         if (isNaN(count))
         {
           count = 0;
