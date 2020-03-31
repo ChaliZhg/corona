@@ -19,7 +19,7 @@ d3.csv(timeline_url, function(data)
     }
   }
 
-function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
+function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight, config) {
   var legendWidth  = 0,
       legendHeight = 0;
 
@@ -56,86 +56,88 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('新增治愈');
+      .text('新增'+config["text"]);
 }
 
-function drawPaths (svg, data, x, y) {
+function drawPaths (svg, data, x, y, config) {
   var sumArea16 = d3.svg.area()
     .interpolate('step-before')
     .x (function (d) { return x(d.date) || 1; })
-    .y0(function (d) { return y(d.sum17); })
+    .y0(function (d) { return y(d.value); })
     .y1(function (d) { return y(0); });
 
   var medianLine = d3.svg.line()
     .interpolate('step-before')
     .x(function (d) { return x(d.date); })
-    .y(function (d) { return y(d.sum17); });
+    .y(function (d) { return y(d.value); });
 
   svg.datum(data);
 
+  console.log(['area '+config["name"], config["name"]+'-line']);
+
   svg.append('path')
-    .attr('class', 'area recovered')
+    .attr('class', 'area '+config["name"])
     .attr('d', sumArea16)
     .attr('clip-path', 'url(#rect-clip)');
 
   svg.append('path')
-    .attr('class', 'recovered-line')
+    .attr('class', config["name"]+'-line')
     .attr('d', medianLine)
     .attr('clip-path', 'url(#rect-clip)');
 }
 
-function addMarker (marker, svg, chartHeight, x) {
-  var radius = 25,
-      xPos = x(marker.date) - radius - 3,
-      yPosStart = chartHeight - radius - 3,
-      yPosEnd = (marker.type === 'Client' ? 80 : 160) + radius + 100;
+// function addMarker (marker, svg, chartHeight, x) {
+//   var radius = 25,
+//       xPos = x(marker.date) - radius - 3,
+//       yPosStart = chartHeight - radius - 3,
+//       yPosEnd = (marker.type === 'Client' ? 80 : 160) + radius + 100;
 
-  var markerG = svg.append('g')
-    .attr('class', 'marker '+marker.type.toLowerCase())
-    .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
-    .attr('opacity', 0);
+//   var markerG = svg.append('g')
+//     .attr('class', 'marker '+marker.type.toLowerCase())
+//     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
+//     .attr('opacity', 0);
 
-  markerG.transition()
-    .duration(1000)
-    .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
-    .attr('opacity', 1);
+//   markerG.transition()
+//     .duration(1000)
+//     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
+//     .attr('opacity', 1);
 
-  markerG.append('path')
-    .attr('d', 'M' + radius + ',' + (chartHeight-yPosStart) + 'L' + radius + ',' + (chartHeight-yPosStart))
-    .transition()
-      .duration(1000)
-      .attr('d', 'M' + radius + ',' + (chartHeight-yPosEnd) + 'L' + radius + ',' + (radius*2));
+//   markerG.append('path')
+//     .attr('d', 'M' + radius + ',' + (chartHeight-yPosStart) + 'L' + radius + ',' + (chartHeight-yPosStart))
+//     .transition()
+//       .duration(1000)
+//       .attr('d', 'M' + radius + ',' + (chartHeight-yPosEnd) + 'L' + radius + ',' + (radius*2));
 
-  markerG.append('circle')
-    .attr('class', 'marker-bg')
-    .attr('cx', radius)
-    .attr('cy', radius)
-    .attr('r', radius);
+//   markerG.append('circle')
+//     .attr('class', 'marker-bg')
+//     .attr('cx', radius)
+//     .attr('cy', radius)
+//     .attr('r', radius);
 
-  markerG.append('text')
-    .attr('x', radius)
-    .attr('y', radius*0.9)
-    .text("死亡");
+//   markerG.append('text')
+//     .attr('x', radius)
+//     .attr('y', radius*0.9)
+//     .text("死亡");
 
-  markerG.append('text')
-    .attr('x', radius)
-    .attr('y', radius*1.5)
-    .text(marker.version+"例");
-}
+//   markerG.append('text')
+//     .attr('x', radius)
+//     .attr('y', radius*1.5)
+//     .text(marker.version+"例");
+// }
 
 function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x) {
   rectClip.transition()
     .duration(1000*markers.length)
     .attr('width', chartWidth);
 
-  markers.forEach(function (marker, i) {
-    setTimeout(function () {
-      addMarker(marker, svg, chartHeight, x);
-    }, 1000 + 500*i);
-  });
+  // markers.forEach(function (marker, i) {
+  //   setTimeout(function () {
+  //     addMarker(marker, svg, chartHeight, x);
+  //   }, 1000 + 500*i);
+  // });
 }
 
-function makeChart (data, markers) {
+function makeChart (config, data, markers) {
   var svgWidth  = 450,
       svgHeight = 200,
       margin = { top: 20, right: 20, bottom: 40, left: 60 },
@@ -145,14 +147,16 @@ function makeChart (data, markers) {
   var x = d3.time.scale().range([0, chartWidth])
             .domain(d3.extent(data, function (d) { return d.date; })),
       y = d3.scale.linear().range([chartHeight, 0])
-            .domain([0, d3.max(data, function (d) { return d.sum17; })]);
+            .domain([0, d3.max(data, function (d) { return d.value; })]);
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom').ticks(15).tickFormat(d3.time.format("%d"))
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
       yAxis = d3.svg.axis().scale(y).orient('left')
                 .innerTickSize(-chartWidth).outerTickSize(0).tickPadding(10);
 
-  var svg = d3.select('#daily_recovery_trend').append('svg')
+  var div_name = config["div"];
+
+  var svg = d3.select(div_name).append('svg')
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
     .append('g')
@@ -165,8 +169,8 @@ function makeChart (data, markers) {
       .attr('width', 0)
       .attr('height', chartHeight);
 
-  addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
-  drawPaths(svg, data, x, y);
+  addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight, config);
+  drawPaths(svg, data, x, y, config);
   startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x);
 }
 
@@ -180,26 +184,51 @@ var parseDate  = d3.time.format('%Y-%m-%d').parse;
     if (i== (tempData.length - 1))
     {
       tempData[i]["recovered-inc"] = 0;
+      tempData[i]["confirmed-inc"] = 0;
+      tempData[i]["death-inc"] = 0;
       // console.log([i, tempData[i].date, tempData[i]["confirmed-inc"]]);
     }
     else
     {
       // console.log([i, tempData[i].date, tempData[i]["confirmed"]]);
+      tempData[i]["confirmed-inc"] = tempData[i]["confirmed"] - tempData[i+1]["confirmed"];
       tempData[i]["recovered-inc"] = tempData[i]["recovered"] - tempData[i+1]["recovered"];
+      tempData[i]["death-inc"] = tempData[i]["deaths"] - tempData[i+1]["deaths"];
       // console.log([i, tempData[i].date, tempData[i]["confirmed-inc"]]);
     }
   }
 
-  var data = tempData.map(function (d) {
+  var data_confirmed = tempData.map(function (d) {
     // console.log([d.date, d["recovered-inc"]]);
     return {
       date:  parseDate(d.date),
-      sum17:d["recovered-inc"],
+      value:d["confirmed-inc"],
     };
   });
 
-  makeChart(data, []);
+  var data_recovered = tempData.map(function (d) {
+    // console.log([d.date, d["recovered-inc"]]);
+    return {
+      date:  parseDate(d.date),
+      value:d["recovered-inc"],
+    };
+  });
 
+  var data_death = tempData.map(function (d) {
+    // console.log([d.date, d["recovered-inc"]]);
+    return {
+      date:  parseDate(d.date),
+      value:d["death-inc"],
+    };
+  });
+
+  configs = {"confirmed":{"div":"#daily_confirmed_trend", name:"confirmed", "text":"确诊", },
+             "recovered":{"div":"#daily_recovered_trend", name:"recovered", "text":"治愈", },
+             "death"    :{"div":"#daily_death_trend", name:"death",         "text":"死亡", }};
+
+  makeChart(configs["confirmed"], data_confirmed, []);
+  makeChart(configs["recovered"], data_recovered, []);
+  makeChart(configs["death"], data_death, []);
   // d3.json('https://teaof.life/corona/data/markers.json', function (error, markerData) {
   //   if (error) {
   //     console.error(error);
