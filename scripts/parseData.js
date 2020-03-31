@@ -242,12 +242,15 @@ var bubble_map = new Datamap({
     // document.getElementById('recovery_increase').innerHTML = today_recoveries - yesterday_recoveries;
     // document.getElementById('death_increase').innerHTML = today_deaths - yesterday_deaths;
     // console.log(today_bubbles.length);
-  });
-
+ 
 
     document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
     document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
     document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
+
+    document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
+    document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
+    document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
 
     today_bubbles.sort(function(a, b) {
       if (a.type > b.type) {
@@ -269,13 +272,6 @@ var bubble_map = new Datamap({
       return 0;
     });
 
-    if (today_infections - yesterday_infections >= 0) {
-      document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
-    } else {
-      document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
-    }
-    document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
-    document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
     // only start drawing bubbles on the map when map has rendered completely.
     // bubble_map.labels({'customLabelText': yesterday_custom_text});
     bubble_map.bubbles(today_bubbles, {
@@ -284,6 +280,9 @@ var bubble_map = new Datamap({
       }
     });
     // bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
+  });
+
+
 
   });
 
