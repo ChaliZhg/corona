@@ -311,7 +311,7 @@ function setup(argument)
       }
     });
     bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
-  }, 1000);
+  }, 1500);
 
 
 
