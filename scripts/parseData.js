@@ -26,7 +26,6 @@ today_recoveries = 0;
 today_time = '';
 today_url = "https://interaktiv.morgenpost.de/corona-virus-karte-infektionen-deutschland-weltweit/data/Coronavirus.current.v2.csv";
 
-
 var result;
 
 
@@ -74,11 +73,13 @@ var bubble_map = new Datamap({
   }
 });
 
+
+  d3.csv(today_url, function(data) {
+
 // function setup(argument)
 // {
   scale = 0.5;
 
-  d3.csv(today_url, function(data) {
     for (var i = data.length - 1; i >= 0; i--) {
       if ((data[i].parent == "Deutschland") && (data[i].label != "Repatriierte")) {
         if (data[i].date > today_time) {
@@ -156,7 +157,9 @@ var bubble_map = new Datamap({
     document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
     document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
     // console.log(today_bubbles.length);
-  });
+
+
+
 
   d3.csv(yesterday_url, function(data) {
     for (var i = data.length - 1; i >= 0; i--) {
@@ -242,8 +245,6 @@ var bubble_map = new Datamap({
   });
 
 
-  setTimeout(() => {
-
     document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
     document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
     document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
@@ -283,7 +284,53 @@ var bubble_map = new Datamap({
       }
     });
     // bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
-  }, 1500);
+
+  });
+
+
+
+  // setTimeout(() => {
+
+  //   document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
+  //   document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
+  //   document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
+
+  //   today_bubbles.sort(function(a, b) {
+  //     if (a.type > b.type) {
+  //       return -1;
+  //     }
+  //     if (a.value > b.value) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   yesterday_bubbles.sort(function(a, b) {
+  //     if (a.type > b.type) {
+  //       return -1;
+  //     }
+  //     if (a.value > b.value) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   if (today_infections - yesterday_infections >= 0) {
+  //     document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
+  //   } else {
+  //     document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+  //   }
+  //   document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
+  //   document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
+  //   // only start drawing bubbles on the map when map has rendered completely.
+  //   // bubble_map.labels({'customLabelText': yesterday_custom_text});
+  //   bubble_map.bubbles(today_bubbles, {
+  //     popupTemplate: function(geo, data) {
+  //       return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
+  //     }
+  //   });
+  //   // bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
+  // }, 1500);
 
 
 
