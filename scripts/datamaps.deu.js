@@ -395,7 +395,7 @@
     this.svg.selectAll(".datamaps-subunit")
       .attr("data-foo", function(d) {
         var center = self.path.centroid(d);
-        var xOffset = 15, yOffset = 10;
+        var xOffset = 0, yOffset = 0;
 
         if ( ["FL", "KY", "MI"].indexOf(d.id) > -1 ) xOffset = -2.5;
         if ( d.id === "NY" ) xOffset = -1;
@@ -440,6 +440,7 @@
           .style("font-size", (options.fontSize || 10) + 'px')
           .style("font-family",  "'Source Sans Pro', Arial, Helvetica, sans-serif")
           .style("text-align", 'left')
+          .style("text-anchor", 'middle')
           .style("fill", options.labelColor || "#000")
               .text(function() {
                   if (options.customLabelText && options.customLabelText[d.id]) {
