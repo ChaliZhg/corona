@@ -38,5 +38,10 @@
     "date": "2020-03-29",
     "type": "Client",
     "version": "500th"
+  },
+  {
+    "date": "2020-03-30",
+    "type": "Client",
+    "version": "600th"
   }
 ]
