@@ -89,7 +89,7 @@ var bubble_map = new Datamap({
         count = parseInt(data[i].confirmed);
         recovered = parseInt(data[i].recovered);
         dead = parseInt(data[i].deaths);
-        if (state == "Nicht zugeordnet") {
+        if (data[i].id == "de.xx") {
           today_infections += (count);
           today_recoveries += (recovered);
           today_deaths += (dead);
