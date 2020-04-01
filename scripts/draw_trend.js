@@ -1,11 +1,11 @@
-// daily_values = [];
-timeline_url = "https://interaktiv.morgenpost.de/corona-virus-karte-infektionen-deutschland-weltweit/data/Coronavirus.timeline.v2.csv";
+daily_values = [];
+timeline_url = "https://d3sid3u2apar25.cloudfront.net/history.v3.csv";
 d3.csv(timeline_url, function(data)   
 {
-  daily_values = [];
+  // daily_values = [];
 
   for (var i = data.length - 1; i >= 0; i--) {
-    if (data[i].area == "germany")
+    if (data[i].id == "de")
     {
       // console.log("good");
       daily_node =
@@ -174,7 +174,7 @@ function makeChart (config, data, markers) {
   startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x);
 }
 
-var parseDate  = d3.time.format('%Y-%m-%d').parse;
+var parseDate  = d3.time.format('%Y%m%d').parse;
 {
   tempData = daily_values;
 
