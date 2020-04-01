@@ -24,7 +24,7 @@ today_infections = 0;
 today_deaths = 0;
 today_recoveries = 0;
 today_time = '';
-today_url = "https://interaktiv.morgenpost.de/corona-virus-karte-infektionen-deutschland-weltweit/data/Coronavirus.current.v2.csv";
+today_url = "https://d3sid3u2apar25.cloudfront.net/current.v3.csv";
 
 var result;
 
@@ -81,7 +81,7 @@ var bubble_map = new Datamap({
   scale = 0.5;
 
     for (var i = data.length - 1; i >= 0; i--) {
-      if ((data[i].parent == "Deutschland") && (data[i].label != "Repatriierte")) {
+      if ((data[i].parent == "de") && (data[i].label != "Repatriierte")) {
         if (data[i].date > today_time) {
           today_time = data[i].date;
         }
@@ -89,7 +89,7 @@ var bubble_map = new Datamap({
         count = parseInt(data[i].confirmed);
         recovered = parseInt(data[i].recovered);
         dead = parseInt(data[i].deaths);
-        if (state == "nicht zugeordnet") {
+        if (state == "Nicht zugeordnet") {
           today_infections += (count);
           today_recoveries += (recovered);
           today_deaths += (dead);
