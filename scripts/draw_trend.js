@@ -198,6 +198,14 @@ var parseDate  = d3.time.format('%Y%m%d').parse;
     }
   }
 
+  document.getElementById('total_number').innerHTML = parseInt(tempData[0]["confirmed"]).toLocaleString();
+  document.getElementById('recovery_number').innerHTML = parseInt(tempData[0]["recovered"]).toLocaleString();
+  document.getElementById('death_number').innerHTML = parseInt(tempData[0]["deaths"]).toLocaleString();
+
+  document.getElementById('infection_increase').innerHTML = "新增" + tempData[0]["confirmed-inc"].toLocaleString();
+  document.getElementById('recovery_increase').innerHTML = "新增" + tempData[0]["recovered-inc"].toLocaleString();
+  document.getElementById('death_increase').innerHTML = "新增" + tempData[0]["death-inc"].toLocaleString();
+
   var data_confirmed = tempData.map(function (d) {
     // console.log([d.date, d["recovered-inc"]]);
     return {

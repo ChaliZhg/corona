@@ -14,7 +14,7 @@ var my_date = yesterday.getDate();
 var my_month = yesterday.getMonth() + 1;
 var my_year = yesterday.getFullYear();
 yesterday_url += (my_date).toString() + "0" + my_month.toString() + my_year.toString() + ".csv";
-document.getElementById('yesterday_date').innerHTML = "昨天 (" + (my_date).toString() + ".0" + my_month.toString() + ")";
+// document.getElementById('yesterday_date').innerHTML = "昨天 (" + (my_date).toString() + ".0" + my_month.toString() + ")";
 state_bubbles = [];
 bubbles = [];
 
@@ -78,7 +78,7 @@ var bubble_map = new Datamap({
 
 // function setup(argument)
 // {
-  scale = 0.5;
+  scale = 0.4;
 
     for (var i = data.length - 1; i >= 0; i--) {
       if ((data[i].parent == "de") && (data[i].label != "Repatriierte")) {
@@ -152,105 +152,13 @@ var bubble_map = new Datamap({
       return 0;
     });
 
-    // document.getElementById('time').innerHTML = today_time;
-    document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
-    document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
-    document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
-    // console.log(today_bubbles.length);
+    // // document.getElementById('time').innerHTML = today_time;
+    // document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
+    // document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
+    // document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
+    // // console.log(today_bubbles.length);
 
 
-
-
-  d3.csv(yesterday_url, function(data) {
-    for (var i = data.length - 1; i >= 0; i--) {
-      if ((data[i].parent == "Deutschland") && (data[i].label != "Repatriierte")) {
-        if (data[i].date > yesterday_time) {
-          yesterday_time = data[i].date;
-        }
-        state = data[i].label;
-        count = parseInt(data[i].confirmed);
-        recovered = parseInt(data[i].recovered);
-        dead = parseInt(data[i].deaths);
-        if (state == "nicht zugeordnet") {
-          yesterday_infections += (count);
-          yesterday_recoveries += (recovered);
-          yesterday_deaths += (dead);
-          continue;
-        }
-        if (isNaN(count)) {
-          count = 0;
-        }
-        if (isNaN(recovered)) {
-          recovered = 0;
-        }
-        if (isNaN(dead)) {
-          dead = 0;
-        }
-        yesterday_infections += (count);
-        yesterday_recoveries += (recovered);
-        yesterday_deaths += (dead);
-        count_node = {
-          centered: state,
-          fillKey: "high",
-          borderColor: '#d14f69',
-          radius: Math.sqrt(count) * scale,
-          value: count,
-          type: "2",
-          info: "确诊",
-        };
-        yesterday_bubbles.push(count_node);
-        recovered_node = {
-          centered: state,
-          fillKey: "middle",
-          borderColor: '#6FE88E',
-          radius: Math.sqrt(recovered) * scale,
-          value: recovered,
-          type: "1",
-          info: "治愈",
-        };
-        yesterday_bubbles.push(recovered_node);
-        dead_node = {
-          centered: state,
-          fillKey: "low",
-          borderColor: '#4D4D4D',
-          radius: Math.sqrt(dead) * scale,
-          value: dead,
-          type: "0",
-          info: "死亡",
-        };
-        yesterday_bubbles.push(dead_node);
-        yesterday_custom_text[state] = count;
-
-      }
-    }
-
-    yesterday_bubbles.sort(function(a, b) {
-      if (a.type > b.type) {
-        return -1;
-      }
-      if (a.value > b.value) {
-        return -1;
-      }
-      return 0;
-    });
-    // document.getElementById('time').innerHTML = yesterday_time;
-    // document.getElementById('total_number').innerHTML = yesterday_infections;
-    // document.getElementById('death_number').innerHTML = yesterday_deaths;
-    // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
-
-    // document.getElementById('infection_increase').innerHTML = today_infections - yesterday_infections;
-    // document.getElementById('recovery_increase').innerHTML = today_recoveries - yesterday_recoveries;
-    // document.getElementById('death_increase').innerHTML = today_deaths - yesterday_deaths;
-    // console.log(today_bubbles.length);
- 
-
-    document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
-    document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
-    document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
-
-    document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
-    document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
-    document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
 
     today_bubbles.sort(function(a, b) {
       if (a.type > b.type) {
@@ -279,8 +187,130 @@ var bubble_map = new Datamap({
         return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
       }
     });
-    // bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
-  });
+    bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40, "labelColor": "#4D4D4D",});
+
+
+
+  // d3.csv(yesterday_url, function(data) {
+  //   for (var i = data.length - 1; i >= 0; i--) {
+  //     if ((data[i].parent == "Deutschland") && (data[i].label != "Repatriierte")) {
+  //       if (data[i].date > yesterday_time) {
+  //         yesterday_time = data[i].date;
+  //       }
+  //       state = data[i].label;
+  //       count = parseInt(data[i].confirmed);
+  //       recovered = parseInt(data[i].recovered);
+  //       dead = parseInt(data[i].deaths);
+  //       if (state == "nicht zugeordnet") {
+  //         yesterday_infections += (count);
+  //         yesterday_recoveries += (recovered);
+  //         yesterday_deaths += (dead);
+  //         continue;
+  //       }
+  //       if (isNaN(count)) {
+  //         count = 0;
+  //       }
+  //       if (isNaN(recovered)) {
+  //         recovered = 0;
+  //       }
+  //       if (isNaN(dead)) {
+  //         dead = 0;
+  //       }
+  //       yesterday_infections += (count);
+  //       yesterday_recoveries += (recovered);
+  //       yesterday_deaths += (dead);
+  //       count_node = {
+  //         centered: state,
+  //         fillKey: "high",
+  //         borderColor: '#d14f69',
+  //         radius: Math.sqrt(count) * scale,
+  //         value: count,
+  //         type: "2",
+  //         info: "确诊",
+  //       };
+  //       yesterday_bubbles.push(count_node);
+  //       recovered_node = {
+  //         centered: state,
+  //         fillKey: "middle",
+  //         borderColor: '#6FE88E',
+  //         radius: Math.sqrt(recovered) * scale,
+  //         value: recovered,
+  //         type: "1",
+  //         info: "治愈",
+  //       };
+  //       yesterday_bubbles.push(recovered_node);
+  //       dead_node = {
+  //         centered: state,
+  //         fillKey: "low",
+  //         borderColor: '#4D4D4D',
+  //         radius: Math.sqrt(dead) * scale,
+  //         value: dead,
+  //         type: "0",
+  //         info: "死亡",
+  //       };
+  //       yesterday_bubbles.push(dead_node);
+  //       yesterday_custom_text[state] = count;
+
+  //     }
+  //   }
+
+  //   yesterday_bubbles.sort(function(a, b) {
+  //     if (a.type > b.type) {
+  //       return -1;
+  //     }
+  //     if (a.value > b.value) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+  //   // document.getElementById('time').innerHTML = yesterday_time;
+  //   // document.getElementById('total_number').innerHTML = yesterday_infections;
+  //   // document.getElementById('death_number').innerHTML = yesterday_deaths;
+  //   // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
+
+  //   // document.getElementById('infection_increase').innerHTML = today_infections - yesterday_infections;
+  //   // document.getElementById('recovery_increase').innerHTML = today_recoveries - yesterday_recoveries;
+  //   // document.getElementById('death_increase').innerHTML = today_deaths - yesterday_deaths;
+  //   // console.log(today_bubbles.length);
+ 
+
+  //   // document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
+  //   // document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
+  //   // document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
+
+  //   // document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
+  //   // document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
+  //   // document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
+
+  //   today_bubbles.sort(function(a, b) {
+  //     if (a.type > b.type) {
+  //       return -1;
+  //     }
+  //     if (a.value > b.value) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   yesterday_bubbles.sort(function(a, b) {
+  //     if (a.type > b.type) {
+  //       return -1;
+  //     }
+  //     if (a.value > b.value) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   // only start drawing bubbles on the map when map has rendered completely.
+  //   // bubble_map.labels({'customLabelText': yesterday_custom_text});
+  //   bubble_map.bubbles(today_bubbles, {
+  //     popupTemplate: function(geo, data) {
+  //       return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
+  //     }
+  //   });
+  //   bubble_map.labels({'customLabelText': today_custom_text, "fontSize": 40});
+  // });
 
 
 
@@ -335,84 +365,84 @@ var bubble_map = new Datamap({
 
 // }
 
-document.addEventListener('DOMContentLoaded', function() {
-  var checkbox = document.querySelector('input[type="checkbox"]');
+// document.addEventListener('DOMContentLoaded', function() {
+//   var checkbox = document.querySelector('input[type="checkbox"]');
 
-  checkbox.addEventListener('change', function() {
-    if (checkbox.checked) {
-      removeElementsByClass("labels");
-      bubble_map.labels({
-        'customLabelText': today_custom_text,
-        "fontSize": 40
-      });
-      document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
-      document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
-      document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
-      // document.getElementById('time').innerHTML = today_time;
-      if (today_infections - yesterday_infections >= 0) {
-        document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
-      } else {
-        document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
-      }
-      document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
-      document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
-      today_bubbles.sort(function(a, b) {
-        if (a.type > b.type) {
-          return -1;
-        }
-        if (a.value > b.value) {
-          return -1;
-        }
-        return 0;
-      });
-      bubble_map.bubbles(today_bubbles, {
-        popupTemplate: function(geo, data) {
-          return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
-        }
-      });
-    } else {
-      removeElementsByClass("labels");
-      bubble_map.labels({
-        'customLabelText': yesterday_custom_text,
-        "fontSize": 40
-      });
-      if (today_infections - yesterday_infections >= 0) {
-        document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
-      } else {
-        document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
-      }
+//   checkbox.addEventListener('change', function() {
+//     if (checkbox.checked) {
+//       removeElementsByClass("labels");
+//       bubble_map.labels({
+//         'customLabelText': today_custom_text,
+//         "fontSize": 40
+//       });
+//       // document.getElementById('total_number').innerHTML = today_infections.toLocaleString();
+//       // document.getElementById('recovery_number').innerHTML = today_recoveries.toLocaleString();
+//       // document.getElementById('death_number').innerHTML = today_deaths.toLocaleString();
+//       // document.getElementById('time').innerHTML = today_time;
+//       // if (today_infections - yesterday_infections >= 0) {
+//       //   document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
+//       // } else {
+//       //   document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+//       // }
+//       // document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
+//       // document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
+//       today_bubbles.sort(function(a, b) {
+//         if (a.type > b.type) {
+//           return -1;
+//         }
+//         if (a.value > b.value) {
+//           return -1;
+//         }
+//         return 0;
+//       });
+//       bubble_map.bubbles(today_bubbles, {
+//         popupTemplate: function(geo, data) {
+//           return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
+//         }
+//       });
+//     } else {
+//       removeElementsByClass("labels");
+//       bubble_map.labels({
+//         'customLabelText': yesterday_custom_text,
+//         "fontSize": 40
+//       });
+//       // if (today_infections - yesterday_infections >= 0) {
+//       //   document.getElementById('infection_increase').innerHTML = "新增" + (today_infections - yesterday_infections).toLocaleString();
+//       // } else {
+//       //   document.getElementById('infection_increase').innerHTML = (today_infections - yesterday_infections).toLocaleString();
+//       // }
 
-      document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
-      document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
-      // document.getElementById('total_number').innerHTML = yesterday_infections;
-      // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
-      // document.getElementById('death_number').innerHTML = yesterday_deaths;
-      // document.getElementById('time').innerHTML = yesterday_time;
-      // document.getElementById('infection_increase').innerHTML = "";
-      // document.getElementById('recovery_increase').innerHTML = "";
-      // document.getElementById('death_increase').innerHTML = "";
-      yesterday_bubbles.sort(function(a, b) {
-        if (a.type > b.type) {
-          return -1;
-        }
-        if (a.value > b.value) {
-          return -1;
-        }
-        return 0;
-      });
-      bubble_map.bubbles(yesterday_bubbles, {
-        popupTemplate: function(geo, data) {
-          return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
-        }
-      });
-    }
-  });
-});
+//       // document.getElementById('recovery_increase').innerHTML = "新增" + (today_recoveries - yesterday_recoveries).toLocaleString();
+//       // document.getElementById('death_increase').innerHTML = "新增" + (today_deaths - yesterday_deaths).toLocaleString();
+//       // document.getElementById('total_number').innerHTML = yesterday_infections;
+//       // document.getElementById('recovery_number').innerHTML = yesterday_recoveries;
+//       // document.getElementById('death_number').innerHTML = yesterday_deaths;
+//       // document.getElementById('time').innerHTML = yesterday_time;
+//       // document.getElementById('infection_increase').innerHTML = "";
+//       // document.getElementById('recovery_increase').innerHTML = "";
+//       // document.getElementById('death_increase').innerHTML = "";
+//       yesterday_bubbles.sort(function(a, b) {
+//         if (a.type > b.type) {
+//           return -1;
+//         }
+//         if (a.value > b.value) {
+//           return -1;
+//         }
+//         return 0;
+//       });
+//       bubble_map.bubbles(yesterday_bubbles, {
+//         popupTemplate: function(geo, data) {
+//           return `<div class="hoverinfo">${data.centered}: ${data.info}${data.value}</div>`;
+//         }
+//       });
+//     }
+//   });
+// });
 
 
-function removeElementsByClass(className) {
-  var elements = document.getElementsByClassName(className);
-  for (var i = elements.length - 1; i >= 0; i--) {
-    elements[i].innerHTML = "";
-  }
-}
+// function removeElementsByClass(className) {
+//   var elements = document.getElementsByClassName(className);
+//   for (var i = elements.length - 1; i >= 0; i--) {
+//     elements[i].innerHTML = "";
+//   }
+// }
